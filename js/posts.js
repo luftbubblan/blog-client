@@ -1,65 +1,37 @@
 window.onload = function () {
-  fetchAllPuns();
+	fetchAllBplogPosts();
 };
 
-async function fetchAllPuns() {
-  const response = await fetch("https://puns-app.herokuapp.com/puns");
-  const puns = await response.json();
-  //creates empty output
-  let outputListOfPuns = "";
+async function fetchAllBplogPosts() {
+	const response = await fetch("http://localhost:5000/posts/");
+	const posts = await response.json();
 
-  //fills the output with all puns that are fetched
-  $.each(puns, function (key, value) {
-    outputListOfPuns += `
-            <li class="list-group-item">
-                <p>
-                    ${value.content} <br>
-                    <span class="date">- ${value.date}</span>
-                </p>
-                
-                <div>
-                    <a href="update-pun.html?id=${value._id}" id="update">Update</a> |
-                    <a href="" data-id="${value._id}" id="delete">Delete</a> 
-                </div>
-            </li>
-        `;
-  });
-  //prints the puns to the site
-  $("#pun-list").html(outputListOfPuns);
-  //runs counter function
-  counter(puns.length);
+	let output = "";
 
-  $("a").click(async function (e) {
-    //preventsDefault from Del-btn, fetches correct pun and deletes it from API
-    if ($(this).html() === "Delete") {
-      e.preventDefault();
+	//iterates all posts and creates the html for them
+	$.each(posts, function(key, blogPost) {
 
-      try {
-        const response = await fetch(
-          `https://puns-app.herokuapp.com/puns/${$(this)[0].dataset.id}`,
-          {
-            method: "DELETE",
-          }
-        );
+		output += `
+			<li class="post" data-id="${blogPost._id}">
 
-        if (!response.ok) {
-          throw new Error("API Error");
-        }
-      } catch (error) {
-        console.log(error);
-      }
+			<h2>${blogPost.title}</h2>
 
-      //preventsDefault from refresh btn
-    } else if ($(this).html() === "Refresh") {
-      e.preventDefault();
-    }
-    //runs the whole code again (updates the site without reloading the site)
-    //runs with both Delete and Refresh btn
-    fetchAllPuns();
-  });
-}
+			
+			<span id="author">${blogPost.author}</span>
+		
+  
+			<p>
+				${blogPost.content.slice(0, 100)}
+				<a href="post.html?id=${blogPost._id}">Read more</a>
+						
+			</p>
 
-//shows how many puns is on the site
-function counter(nbrOfPuns) {
-  $("#count").html(`${nbrOfPuns} st artiklar funna`);
+			<span id="date">${blogPost.date.slice(0, 10)} ${blogPost.date.slice(11, 16)}</span>
+			<div id="tags">Tags:${blogPost.tags}</div>
+
+			</li>
+		`;
+	})
+	//posts the output tot he site in the ul
+	$('#post-list').html(output);
 }

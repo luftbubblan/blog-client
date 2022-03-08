@@ -1,51 +1,26 @@
 <html lang="en">
-  <head>
+	<head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- JQUERY UI -->
-    <link
-      rel="stylesheet"
-      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
-    />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
-    <div id="container">
-      <h1>My blog</h1>
+    <link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<div id="container">
+			<h1>My blog</h1>
 
-      <nav id="main-nav">
-        <a href="" id="refresh">Refresh</a>
-        <p id="count"></p>
-        <a href="./admin/admin.html">Admin</a>
-      </nav>
+			<a href="./admin/admin.html">Admin</a>
 
-      <ul id="pun-list"></ul>
-      <!-- genereras dynamiskt -->
-      <h2>Some fancy blog title</h2>
-      <header id="meta-data">
-        <span>Joni &#8226<span>
-        <span>Uppdatera &#8226</span>
-        <span>2021-12-12 10:31:25<span>
-        <!-- obs! fattas att bla lägga till taggar i metadatan (VG) -->
-        </header>
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum ab
-        dolor, itaque harum minima aspernatur saepe aliquam debitis esse
-        laboriosam quo veritatis consectetur consequatur adipisci dolorem animi
-        possimus delectus quis tenetur praesentium sed nam ducimus explicabo
-        iure. Hic, aut vitae.
-        <!-- här lägger vi till en preview och en read more button till själva inlägget (VG) --> 
-      </p>
-      
-    </div>
-
-    <!-- JQUERY JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- JQUERY UI JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-    <!-- CUSTOM JS -->
-    <script src="js/posts.js"></script>
-  </body>
+			<ul id="post-list"></ul>
+		</div>
+		<!-- JQUERY JS-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+		<!-- JQUERY UI JS-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<!-- CUSTOM JS -->
+		<script src="js/posts.js"></script>
+  	</body>
 </html>
