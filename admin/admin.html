@@ -2,7 +2,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Admin</title>
     <!-- JQUERY UI -->
     <link
       rel="stylesheet"
@@ -16,8 +16,10 @@
       <nav><a href="../index.html">Blog page</a></nav>
       <hr />
       <h1>Handle your posts</h1>
-      <div><a href="create-post.html">Create new post</a></div>
-      <p>Choose the post you want to update and/or delete.</p>
+      <div class="top-info-container">
+        <p>Choose the post you want to update or delete.</p>
+        <div><a href="create-post.html">Create new post</a></div>
+      </div>
     </header>
     <main>
       <table class="table">
@@ -29,33 +31,7 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody id="tBody">
-          <!-- skapa varje tr/td dynamiskt i js och fyll de med content från API -->
-          <!-- <tr>
-            <td>Some COOL title</td>
-            <td>Joni</td>
-            <td>2021-11-22 14:32</td>
-            <td><a href="">Update</a> / <a href="">Delete</a></td>
-          </tr>
-          <tr>
-            <td>Some COOL title</td>
-            <td>Joni</td>
-            <td>2021-11-22 14:32</td>
-            <td><a href="">Update</a> / <a href="">Delete</a></td>
-          </tr>
-          <tr>
-            <td>Some COOL title</td>
-            <td>Joni</td>
-            <td>2021-11-22 14:32</td>
-            <td><a href="">Update</a> / <a href="">Delete</a></td>
-          </tr>
-          <tr>
-            <td>Some COOL title</td>
-            <td>Joni</td>
-            <td>2021-11-22 14:32</td>
-            <td><a href="">Update</a> / <a href="">Delete</a></td>
-          </tr> -->
-        </tbody>
+        <tbody id="tBody"></tbody>
       </table>
       <div id="errDiv" class="errMessage"></div>
     </main>
