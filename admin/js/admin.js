@@ -22,7 +22,7 @@ async function fetchAllPosts() {
       <td>${post.date.slice(0, 10)} ${post.date.slice(11, 16)}</td>
       <td><a href="update-post.html?id=${
         post._id
-      }">Update</a> / <a href="">Delete</a></td>
+      }">Update</a> / <a href="#" class="delete-task">Delete</a></td>
       </tr>
       
       `;
@@ -33,37 +33,9 @@ async function fetchAllPosts() {
     console.log(err);
     errDiv.innerHTML = `There was an error (${err}). Try again!`;
   }
+
+  const deleteTask = document.querySelectorAll(".delete-task");
+  console.log(deleteTask);
+
+  // add eveneListener here!
 }
-
-/*    $('a').click(async function(e) {
-        //preventsDefault from Del-btn, fetches correct pun and deletes it from API
-        if($(this).html() === 'Delete') {
-            e.preventDefault();
-
-            try {
-                const response = await fetch(`https://puns-app.herokuapp.com/puns/${$(this)[0].dataset.id}`, {
-                    method: 'DELETE'
-                })
-        
-                if(!response.ok) {
-                    throw new Error('API Error');
-                }
-        
-            } catch(error) {
-                console.log(error);
-            }
-
-        //preventsDefault from refresh btn
-        } else if($(this).html() === 'Refresh') {
-            e.preventDefault();
-        }
-        //runs the whole code again (updates the site without reloading the site)
-        //runs with both Delete and Refresh btn
-        fetchAllPosts();
-    });
-}
-
-//shows how many puns is on the site
-function counter(nbrOfPuns) {
-    $('#count').html(`${nbrOfPuns} puns found`);
-}  */
