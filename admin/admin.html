@@ -4,60 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <!-- JQUERY UI -->
-    <link rel="stylesheet"href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
+    <link
+      rel="stylesheet"
+      href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css"
     />
     <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/style.css" />
-
-    <style>
-      body {
-        width: 920px;
-        margin: 30px auto;
-      }
-      .table {
-        border-collapse: collapse;
-        margin: 25px 0;
-        font-size: 0.9em;
-        width: 920px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-      }
-
-      .table thead tr {
-        background-color: #333;
-        color: #ffffff;
-        text-align: left;
-      }
-
-      .table th,
-      .table td {
-        padding: 12px 15px;
-      }
-
-      .table tbody tr {
-        border-bottom: 1px solid #dddddd;
-      }
-
-      .table tbody tr:nth-of-type(even) {
-        background-color: #f3f3f3;
-      }
-
-      .table tbody tr:last-of-type {
-        border-bottom: 2px solid #333;
-      }
-
-      .table tbody tr.active-row {
-        font-weight: bold;
-        color: #009879;
-      }
-
-      nav {
-        text-align: right;
-      }
-
-      header div {
-        text-align: right;
-      }
-    </style>
+    <link rel="stylesheet" href="/admin/css/admin.css" />
   </head>
   <body>
     <header>
@@ -77,9 +29,9 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="tBody">
           <!-- skapa varje tr/td dynamiskt i js och fyll de med content från API -->
-          <tr>
+          <!-- <tr>
             <td>Some COOL title</td>
             <td>Joni</td>
             <td>2021-11-22 14:32</td>
@@ -102,9 +54,10 @@
             <td>Joni</td>
             <td>2021-11-22 14:32</td>
             <td><a href="">Update</a> / <a href="">Delete</a></td>
-          </tr>
+          </tr> -->
         </tbody>
       </table>
+      <div id="errDiv" class="errMessage"></div>
     </main>
 
     <!-- JQUERY JS-->
