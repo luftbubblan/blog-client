@@ -1,4 +1,6 @@
-window.onload = function () {
+console.log("checking if connected");
+
+/* window.onload = function () {
     fetchAllPuns();
 }
 
@@ -60,4 +62,4 @@ async function fetchAllPuns() {
 //shows how many puns is on the site
 function counter(nbrOfPuns) {
     $('#count').html(`${nbrOfPuns} puns found`);
-}
+} */
