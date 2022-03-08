@@ -1,10 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   width: 920px;
   margin: 30px auto;
 }
+
+.top-info-container {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.top-info-container div {
+  display: flex;
+  align-items: center;
+}
+
 .table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: 5px 0;
   font-size: 0.9em;
   width: 920px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -50,3 +66,47 @@ header div {
   color: #d8000c;
   padding: 15px;
 }
+
+/* Media queries */
+
+/* @media only screen and (max-width: 950px) {
+  h1 {
+    text-align: center;
+  }
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr {
+    border: 1px solid #ccc;
+  }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+
+  td:before {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+  }
+}
+ */
