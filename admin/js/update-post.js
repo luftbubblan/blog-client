@@ -8,30 +8,31 @@ async function updatePost(e) {
     const urlParams = new URLSearchParams(window.location.search);
 
     //fetches the specific pun that should be updated
-    // const response = await fetch(`https://puns-app.herokuapp.com/puns/${urlParams.get("id")}`);
-    // const pun = await response.json();
+    const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`);
+    const post = await response.json();
+    console.log(post)
 
     //fills out the textbox with the text from the fetched pun
     // $('#content-textarea').val(pun.content);
     
-    let allTags = [];
+    // let allTags = [];
     //snaps up the form
-    const formData = new FormData(e.target);
-    $.each(formData.getAll('tags'), function(key, tag) {
-        allTags.push(tag);
-    })
+    // const formData = new FormData(e.target);
+    // $.each(formData.getAll('tags'), function(key, tag) {
+    //     allTags.push(tag);
+    // })
  
-    const contentObj = {
-        title: formData.get('title'),
-        author: formData.get('author'),
-        content: formData.get('content'),
-        tags: allTags
-    };
+    // const contentObj = {
+    //     title: formData.get('title'),
+    //     author: formData.get('author'),
+    //     content: formData.get('content'),
+    //     tags: allTags
+    // };
     
     //converts the content to JSON
-    const JSONContent = JSON.stringify(contentObj);
+    // const JSONContent = JSON.stringify(contentObj);
 
-     try {
+     /* try {
         //POSTs the JSON to the API in a new post
         const response = await fetch("http://localhost:5000/posts/", {
             method: "POST",
@@ -50,7 +51,7 @@ async function updatePost(e) {
 
     } catch(error) {
         console.log(error);
-    }
+    } */
 }
 
 
