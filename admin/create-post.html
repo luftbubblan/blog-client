@@ -10,14 +10,39 @@
 </head>
 <body>  
     <div id="container">
-        <h1>New pun</h1>
+        <a href="admin.html">&#x2190; back to admin</a>
+        <h1>Create new Post</h1>
 
-        <form id="create-pun-form">
-            <label for="">Content</label>
-            <textarea name="content" id="content-textarea" cols="30" rows="10" autofocus></textarea>
+        <form id="createPostForm">
+            <div id="inputDiv">
+                <div>
+                    <label for="title">Title</label>
+                    <input class="inputField" type="text" name="title" id="titleInput">
+                </div>
+                
+                <div>
+                    <label for="author">Author</label>
+                    <input class="inputField" type="text" name="author" id="authorInput"> 
+                </div>
+            </div>
 
-            <input type="submit" value="Create">
-            <a href="index.html">&#x2190; back</a>
+            <div id="contentDiv">
+                <label for="content">Content</label>
+                <textarea name="content" id="contentTextarea" cols="30" rows="10"></textarea>
+            </div>
+
+            <div id="tagsDiv">
+                <label for="tags"><h3>Tags</h3></label><br>
+                <input name="tags" class="checkBox" type="checkbox" value="herb">Herb
+                <input name="tags" class="checkBox" type="checkbox" value="flowers">Flowers
+                <input name="tags" class="checkBox" type="checkbox" value="trees">Trees
+                <input name="tags" class="checkBox" type="checkbox" value="fruitTrees">Fruit trees
+                <input name="tags" class="checkBox" type="checkbox" value="pots">Pots
+                <input name="tags" class="checkBox" type="checkbox" value="vegetables">Vegetables
+                <input name="tags" class="checkBox" type="checkbox" value="architecture">Architecture
+            </div>
+
+            <input type="submit" value="Create"><br>
         </form>
     </div>
 

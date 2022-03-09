@@ -1,125 +1,58 @@
-* {
-  box-sizing: border-box;
-}
-
-/* body {
-    background-color: lightsteelblue;
-    background: linear-gradient(
-                rgb(100, 100, 100),
-                rgb(150, 150, 150),
-                rgb(200, 200, 200),
-                rgb(250, 250, 250));
-}
- */
-/* h1,
-#create-pun-form,
-#update-pun-form,
-#main-nav p {
-  color: floralwhite;
-}
- */
 #container {
-  width: 600px;
-  margin: 20px auto;
+	width: 600px;
+	margin: 20px auto;
 }
 
-input,
-textarea,
-select {
-  width: 100%;
-  margin-bottom: 10px;
-  border-radius: 5px;
-  border: 1px solid #333;
-  resize: none;
+#inputDiv {
+	display: flex;
+	justify-content: space-between;
 }
 
-input {
-  padding: 10px;
+#inputDiv div {
+	width: 45%;
 }
 
-form a {
-  width: 100%;
-  display: block;
-  text-align: center;
+.inputField {
+	width: 100%;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	border: 1px solid #333;
 }
 
-#main-nav {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 20px;
+#contentDiv {
+	width: 100%;
+	margin: 20px 0;
 }
 
-#pun-list li {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #999;
-  background-color: rgb(240, 240, 240);
-  display: flex;
-  justify-content: space-between;
+textarea {
+	margin-top: 10px;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #333;
+	resize: none;
 }
 
-#pun-list li p {
-  width: 450px;
+#tagsDiv {
+	margin: 50px 0;
 }
 
-#pun-list li:first-child {
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+#tagsDiv h3 {
+	margin: 0;
 }
 
-#pun-list {
-  padding: 0;
-}
-
-.date {
-  font-style: italic;
-  font-weight: 600;
-  color: rgb(160, 160, 160);
+.checkBox {
+	margin-right: 10px;
 }
 
 a {
-  text-decoration: none;
+  	text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
+  	text-decoration: underline;
 }
 
-#update,
-#create-pun-form a,
-#update-pun-form a {
-  color: darkblue;
-}
-
-#update:hover,
-#create-pun-form a:hover,
-#update-pun-form a:hover {
-  color: rgba(42, 42, 187, 0.692);
-}
-
-#delete {
-  color: rgb(190, 47, 47);
-}
-
-#delete:hover {
-  color: rgb(226, 108, 108);
-}
-
-#refresh {
-  color: rgb(84, 180, 164);
-}
-
-#refresh:hover {
-  color: rgba(121, 212, 197);
-}
-
-#create {
-  color: rgb(108, 189, 108);
-}
-
-#create:hover {
-  color: rgba(149, 209, 149);
+.break {
+	flex-basis: 100%;
+	height: 0;
 }

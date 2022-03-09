@@ -1,22 +1,34 @@
 window.onload = function () {
-    $('#create-pun-form').submit(createPun);
+    $('#createPostForm').submit(createPost);
 }
 
-async function createPun(e) {
+async function createPost(e) {
     e.preventDefault();
     
+    let allTags = [];
     //snaps up the form
     const formData = new FormData(e.target);
+    $.each(formData.getAll('tags'), function(key, tag) {
+        allTags.push(tag);
+    })
+    
+
+
+    
     const contentObj = {
-        content: formData.get('content')
+        title: formData.get('title'),
+        author: formData.get('author'),
+        content: formData.get('content'),
+        tags: allTags
     };
+    
     //converts the content to JSON
     const JSONContent = JSON.stringify(contentObj);
 
-    try {
-        //POSTs the JSON to the API in a new pun
-        const response = await fetch('https://puns-app.herokuapp.com/puns', {
-            method: 'POST',
+     try {
+        //POSTs the JSON to the API in a new post
+        const response = await fetch("http://localhost:5000/posts/", {
+            method: "POST",
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -27,8 +39,8 @@ async function createPun(e) {
             throw new Error('API Error');
         }
 
-        //sends the user back to index site
-        window.location.replace('index.html');
+        //sends the user back to admin site
+        // window.location.replace('admin.html');
 
     } catch(error) {
         console.log(error);
