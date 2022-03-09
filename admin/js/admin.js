@@ -17,7 +17,7 @@ async function fetchAllPosts() {
     posts.forEach((post) => {
       html += ` 
       <tr>
-        <td>${post.title}</td>
+        <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
         <td>${post.author}</td>
         <td>${showTags(post.tags)}</td>
         <td>${post.date.slice(0, 10)} ${post.date.slice(11, 16)}</td>
