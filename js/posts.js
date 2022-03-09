@@ -25,7 +25,7 @@ async function fetchAllBplogPosts() {
 						
 			</p>
 
-			<span id="date">${blogPost.date.slice(0, 10)} ${blogPost.date.slice(
+			<span id="date">${blogPost.date.slice(0, 10)} - ${blogPost.date.slice(
       11,
       16
     )}</span>
@@ -34,20 +34,20 @@ async function fetchAllBplogPosts() {
 			</li>
 		`;
 
-    //function for hiding the div if the array is empty or first index pos is null
-
+    //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
     function showTags(array) {
       if (array === null) {
-        console.log("array is null");
         return "";
       } else if (array.length !== 0) {
-        console.log("the array has atleast one or more elements");
-        return `<div id='tags'>Tags: ${array.join(", ")}</div>`;
+        return `<div id='tags'>Tags: ${array
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(", ")}`;
       } else {
         return "";
       }
     }
   });
+
   //posts the output tot he site in the ul
   $("#post-list").html(output);
 }

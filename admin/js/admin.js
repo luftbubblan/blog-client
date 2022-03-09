@@ -7,6 +7,7 @@ async function fetchAllPosts() {
   try {
     const response = await fetch("http://localhost:5000/posts/");
     const posts = await response.json();
+    console.log(posts[6].tags);
 
     if (!response.ok) {
       throw new Error("Error!");
@@ -20,7 +21,7 @@ async function fetchAllPosts() {
         <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
         <td>${post.author}</td>
         <td>${showTags(post.tags)}</td>
-        <td>${post.date.slice(0, 10)} ${post.date.slice(11, 16)}</td>
+        <td>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</td>
         <td><a href="update-post.html?id=${
           post._id
         }">Update</a> / <a href="#" class="delete-task" data-task-id="${
@@ -30,12 +31,14 @@ async function fetchAllPosts() {
       `;
     });
 
-    //showing tags in array (basically hiding empty tags)
+    //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
     function showTags(array) {
       if (array === null) {
         return "";
       } else if (array.length !== 0) {
-        return `${array.join(", ")}`;
+        return `${array
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(", ")}`;
       } else {
         return "";
       }
