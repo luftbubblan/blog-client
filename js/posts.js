@@ -20,8 +20,8 @@ async function fetchAllBplogPosts() {
 		
   
 			<p>
-				${blogPost.content.slice(0, 100).replace(/.$/, "...")}
-				<a href="post.html?id=${blogPost._id}">read more</a>
+				${blogPost.content.slice(0, 100).slice(0, -3) + "..."}
+        <a href="post.html?id=${blogPost._id}">read more</a>
 						
 			</p>
 
