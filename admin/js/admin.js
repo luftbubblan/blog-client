@@ -19,7 +19,7 @@ async function fetchAllPosts() {
       <tr>
         <td>${post.title}</td>
         <td>${post.author}</td>
-        <td>${post.tags}</td>
+        <td>${showTags(post.tags)}</td>
         <td>${post.date.slice(0, 10)} ${post.date.slice(11, 16)}</td>
         <td><a href="update-post.html?id=${
           post._id
@@ -29,6 +29,17 @@ async function fetchAllPosts() {
       </tr>
       `;
     });
+
+    //showing tags in array (basically hiding empty tags)
+    function showTags(array) {
+      if (array === null) {
+        return "";
+      } else if (array.length !== 0) {
+        return `${array}`;
+      } else {
+        return "";
+      }
+    }
 
     document.querySelector("#tBody").innerHTML = html;
   } catch (err) {
