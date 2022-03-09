@@ -6,18 +6,48 @@
     <!-- JQUERY UI -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/update-post.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubballi&family=Raleway:wght@300&family=Sorts+Mill+Goudy&family=Spartan:wght@300;600&family=Staatliches&display=swap" rel="stylesheet">
 </head>
-<body>
+<body>  
     <div id="container">
-        <h1>Update pun</h1>
+        <a href="admin.html">&#x2190; back to admin</a>
+        <h1>Update Post</h1>
 
-        <form id="update-pun-form">
-            <label for="">Content</label>
-            <textarea name="content" id="content-textarea" cols="30" rows="10" autofocus></textarea>
+        <form id="updatePostForm">
+            <div id="inputDiv">
+                <div>
+                    <label for="title">Title</label>
+                    <input class="inputField" type="text" name="title" required>
+                </div>
+                
+                <div>
+                    <label for="author">Author</label>
+                    <input class="inputField" type="text" name="author" required> 
+                </div>
+            </div>
 
-            <input type="submit" value="Update">
-            <a href="index.html">&#x2190; back</a>
+            <div id="contentDiv">
+                <label for="content">Content</label>
+                <textarea name="content" id="contentTextarea" cols="30" rows="20" required></textarea>
+            </div>
+
+            <div id="tagsDiv">
+                <label for="tags">Tags</label><br>
+                <input name="tags" class="checkBox" type="checkbox" value="herb">Herb
+                <input name="tags" class="checkBox" type="checkbox" value="flowers">Flowers
+                <input name="tags" class="checkBox" type="checkbox" value="trees">Trees
+                <input name="tags" class="checkBox" type="checkbox" value="fruitTrees">Fruit trees
+                <input name="tags" class="checkBox" type="checkbox" value="pots">Pots
+                <input name="tags" class="checkBox" type="checkbox" value="vegetables">Vegetables
+                <input name="tags" class="checkBox" type="checkbox" value="architecture">Architecture
+            </div>
+
+            <input type="submit" id="submitBtn" value="Update"><br>
         </form>
     </div>
 
@@ -27,6 +57,6 @@
 	<!-- JQUERY UI JS-->
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 	<!-- CUSTOM JS -->
-    <script src="js/update-post.js"></script>
+    <script src="js/create-post.js"></script>
 </body>
 </html>

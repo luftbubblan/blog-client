@@ -40,7 +40,7 @@ async function createPost(e) {
         }
 
         //sends the user back to admin site
-        // window.location.replace('admin.html');
+        window.location.replace('admin.html');
 
     } catch(error) {
         console.log(error);

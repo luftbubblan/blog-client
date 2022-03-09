@@ -6,7 +6,13 @@
     <!-- JQUERY UI -->
 	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
 	<!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/create-post.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hubballi&family=Raleway:wght@300&family=Sorts+Mill+Goudy&family=Spartan:wght@300;600&family=Staatliches&display=swap" rel="stylesheet">
+	
 </head>
 <body>  
     <div id="container">
@@ -17,22 +23,22 @@
             <div id="inputDiv">
                 <div>
                     <label for="title">Title</label>
-                    <input class="inputField" type="text" name="title" id="titleInput">
+                    <input class="inputField" type="text" name="title" required>
                 </div>
                 
                 <div>
                     <label for="author">Author</label>
-                    <input class="inputField" type="text" name="author" id="authorInput"> 
+                    <input class="inputField" type="text" name="author" required> 
                 </div>
             </div>
 
             <div id="contentDiv">
                 <label for="content">Content</label>
-                <textarea name="content" id="contentTextarea" cols="30" rows="10"></textarea>
+                <textarea name="content" id="contentTextarea" cols="30" rows="20" required></textarea>
             </div>
 
             <div id="tagsDiv">
-                <label for="tags"><h3>Tags</h3></label><br>
+                <label for="tags">Tags</label><br>
                 <input name="tags" class="checkBox" type="checkbox" value="herb">Herb
                 <input name="tags" class="checkBox" type="checkbox" value="flowers">Flowers
                 <input name="tags" class="checkBox" type="checkbox" value="trees">Trees
@@ -42,7 +48,7 @@
                 <input name="tags" class="checkBox" type="checkbox" value="architecture">Architecture
             </div>
 
-            <input type="submit" value="Create"><br>
+            <input type="submit" id="submitBtn" value="Post new"><br>
         </form>
     </div>
 
