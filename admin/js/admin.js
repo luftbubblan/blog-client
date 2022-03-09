@@ -35,7 +35,8 @@ async function fetchAllPosts() {
       if (array === null) {
         return "";
       } else if (array.length !== 0) {
-        return `${array}`;
+        console.log(array);
+        return `${array.join(", ")}`;
       } else {
         return "";
       }
