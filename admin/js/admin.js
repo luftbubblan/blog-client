@@ -14,11 +14,12 @@ async function fetchAllPosts() {
 
     let html = "";
 
-    for (let post of posts) {
+    posts.forEach((post) => {
       html += ` 
       <tr>
         <td>${post.title}</td>
         <td>${post.author}</td>
+        <td>${post.tags}</td>
         <td>${post.date.slice(0, 10)} ${post.date.slice(11, 16)}</td>
         <td><a href="update-post.html?id=${
           post._id
@@ -27,7 +28,7 @@ async function fetchAllPosts() {
       }">Delete</a></td>
       </tr>
       `;
-    }
+    });
 
     document.querySelector("#tBody").innerHTML = html;
   } catch (err) {
