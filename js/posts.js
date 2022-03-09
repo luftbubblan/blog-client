@@ -25,27 +25,25 @@ async function fetchAllBplogPosts() {
 						
 			</p>
 
-			<span id="date">${blogPost.date.slice(0, 10)} ${blogPost.date.slice(
-      11,
-      16
-    )}</span>
-			<div id="tags">Tags:${blogPost.tags}</div>
+			<span id="date">${blogPost.date.slice(0, 10)} ${blogPost.date.slice(11, 16)}</span>
+			${showTags(blogPost.tags)}
 			
 			</li>
 		`;
 
-    // ${hideEmptyArr(blogPost.tags)}
-
     //function for hiding the div if the array is empty or first index pos is null
 
-    /*   async function hideEmptyArr(array) {
-      if (array.length === 0 || array[0] === null) {
-        console.log("array has 0 elements");
-        document.querySelector("#tags").style.display = "none";
-      } else {
-        console.log("the array has atleast one or more elements");
-      }
-    } */
+		function showTags(array) {
+			if (array === null) {
+				console.log("array is null");
+				return "";
+			} else if (array.length !== 0) {
+				 console.log("the array has atleast one or more elements");
+				return `<div id='tags'>Tags:${array}</div>`;
+			} else {
+				return "";
+			}
+		}
   });
   //posts the output tot he site in the ul
   $("#post-list").html(output);
