@@ -1,0 +1,17 @@
+#meta-data {
+	margin-bottom: 30px;
+	font-style: italic;
+}
+
+ul {
+	list-style: none;
+}
+
+.post {
+	border: 1px solid black;
+}
+
+#container {
+	width: 600px;
+	margin: 20px auto;
+}
