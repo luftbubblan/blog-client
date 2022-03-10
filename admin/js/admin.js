@@ -9,9 +9,9 @@ async function fetchAllPosts() {
     const posts = await response.json();
     posts.reverse();
 
-    const a = await fetch('authors.txt');
-	  const b = await a.text();
-	  const approvedAuthors = b.split(",");
+    const authors = await fetch('authors.txt');
+		const authorsText = await authors.text();
+		const approvedAuthors = authorsText.split(",");
 
     if (!response.ok) {
       throw new Error("Error!");

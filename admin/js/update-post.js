@@ -1,6 +1,19 @@
 window.onload = function () {
+    authors()
     fetchPost();
     $('#updatePostForm').submit(updatePost);
+}
+
+async function authors() {
+    const authors = await fetch('authors.txt');
+    const authorsText = await authors.text();
+    const approvedAuthors = authorsText.split(",");
+
+    for (let approvedAuthor of approvedAuthors) {
+        $('#authorList').append(`
+        <option id="${approvedAuthor}" value="${approvedAuthor}">${approvedAuthor}</option>
+        `)
+	}
 }
 
 async function fetchPost() {
@@ -11,8 +24,8 @@ async function fetchPost() {
     const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`);
     const post = await response.json();
 
-    document.querySelector('#inputDiv input').value = post.title;
-    document.querySelectorAll('#inputDiv input')[1].value = post.author;
+    document.querySelector('input').value = post.title;
+    document.querySelector(`#${post.author}`).setAttribute('selected', '')
     document.querySelector('#contentTextarea').value = post.content;
     let allTags = document.querySelectorAll('.checkbox');
 
@@ -31,9 +44,9 @@ async function updatePost(e) {
     e.preventDefault();
     
     //snaps up the title and saves it to a variable
-    const title = document.querySelector('#inputDiv input').value;
+    const title = document.querySelector('input').value;
     //snaps up the author and saves it to a variable
-    const author = document.querySelectorAll('#inputDiv input')[1].value;
+    const author = document.querySelector('select').value;
     //snaps up the content and saves it to a variable
     const content = document.querySelector('#contentTextarea').value;
     //snaps up the tags and saves it to a variable

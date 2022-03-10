@@ -1,5 +1,18 @@
 window.onload = function () {
+    authors();
     $('#createPostForm').submit(createPost);
+}
+
+async function authors() {
+    const authors = await fetch('authors.txt');
+    const authorsText = await authors.text();
+    const approvedAuthors = authorsText.split(",");
+
+    for (let approvedAuthor of approvedAuthors) {
+        $('#authorList').append(`
+        <option value="${approvedAuthor}">${approvedAuthor}</option>
+        `)
+	}
 }
 
 async function createPost(e) {
@@ -27,6 +40,15 @@ async function createPost(e) {
     const JSONContent = JSON.stringify(contentObj);
 
      try {
+        const authors = await fetch('authors.txt');
+        const authorsText = await authors.text();
+        const approvedAuthors = authorsText.split(",");
+    
+        for (let approvedAuthor of approvedAuthors) {
+            $('#authorList').append(`
+            <option value="${approvedAuthor}">${approvedAuthor}</option>
+            `)
+        }
         //POSTs the JSON to the API in a new post
         const response = await fetch("http://localhost:5000/posts/", {
             method: "POST",
