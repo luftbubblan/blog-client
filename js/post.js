@@ -25,22 +25,25 @@ async function readMore() {
         <h2>About us</h2>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti, nostrum?</p>
         <h3>Latest posts</h3>
-         
       </aside>
     </div>
 		`
   );
 }
-
-/* async function gettingPosts() {
+/* 
+async function gettingPosts() {
   const response = await fetch("http://localhost:5000/posts/");
   const posts = await response.json();
-  console.log(posts[1].title);
-  let html = "";
+  let postList = "";
 
   for (let i = 0; i < 5; i++) {
-    console.log("Hej");
+    postList += `
+    
+    <li>${posts[i].title}</li>
+    
+    `;
   }
+  console.log(postList);
 }
 
 gettingPosts(); */
