@@ -8,6 +8,7 @@ async function readMore() {
     `http://localhost:5000/posts/${urlParams.get("id")}`
   );
   const post = await response.json();
+  console.log(post);
 
   $("#main-content").html(
     `
