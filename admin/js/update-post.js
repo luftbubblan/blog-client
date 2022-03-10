@@ -14,14 +14,16 @@ async function fetchPost() {
     document.querySelector('#inputDiv input').value = post.title;
     document.querySelectorAll('#inputDiv input')[1].value = post.author;
     document.querySelector('#contentTextarea').value = post.content;
-    let allTags = document.querySelectorAll('.checkbox')
+    let allTags = document.querySelectorAll('.checkbox');
 
-    for (let tag of allTags) {
-        for (let postTag of post.tags) {
-            if (tag.value === postTag){
-                tag.checked = true;
-            }
-        }  
+    if(post.tags !== null) {
+        for (let tag of allTags) {
+            for (let postTag of post.tags) {
+                if (tag.value === postTag) {
+                    tag.checked = true;
+                }
+            }  
+        }
     }
 }
 
@@ -40,7 +42,7 @@ async function updatePost(e) {
     let tags = [];
     for (let tag of allTags) {
         if(tag.checked) {
-            tags.push(tag.value)
+            tags.push(tag.value);
         }
     }
 
