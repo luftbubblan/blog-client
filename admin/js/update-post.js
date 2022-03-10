@@ -10,16 +10,13 @@ async function fetchPost() {
     //fetches the specific pun that should be updated
     const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`);
     const post = await response.json();
-    console.log(post);
 
     document.querySelector('#inputDiv input').value = post.title;
     document.querySelectorAll('#inputDiv input')[1].value = post.author;
     document.querySelector('#contentTextarea').value = post.content;
     let allTags = document.querySelectorAll('.checkbox')
-    console.log(post.tags)
 
     for (let tag of allTags) {
-        console.log(tag)
         for (let postTag of post.tags) {
             if (tag.value === postTag){
                 tag.checked = true;
@@ -28,36 +25,40 @@ async function fetchPost() {
     }
 }
 
-async function updatePost() {
+async function updatePost(e) {
+    e.preventDefault();
     
-}
+    //snaps up the title and saves it to a variable
+    const title = document.querySelector('#inputDiv input').value;
+    //snaps up the author and saves it to a variable
+    const author = document.querySelectorAll('#inputDiv input')[1].value;
+    //snaps up the content and saves it to a variable
+    const content = document.querySelector('#contentTextarea').value;
+    //snaps up the tags and saves it to a variable
+    const allTags = document.querySelectorAll('.checkbox');
 
+    let tags = [];
+    for (let tag of allTags) {
+        if(tag.checked) {
+            tags.push(tag.value)
+        }
+    }
 
-
-    //fills out the textbox with the text from the fetched pun
-    // $('#content-textarea').val(pun.content);
-    
-    // let allTags = [];
-    //snaps up the form
-    // const formData = new FormData(e.target);
-    // $.each(formData.getAll('tags'), function(key, tag) {
-    //     allTags.push(tag);
-    // })
- 
-    // const contentObj = {
-    //     title: formData.get('title'),
-    //     author: formData.get('author'),
-    //     content: formData.get('content'),
-    //     tags: allTags
-    // };
-    
+    const contentObj = {
+        title,
+        author,
+        content,
+        tags
+    };
     //converts the content to JSON
-    // const JSONContent = JSON.stringify(contentObj);
+    const JSONContent = JSON.stringify(contentObj);
 
-     /* try {
-        //POSTs the JSON to the API in a new post
-        const response = await fetch("http://localhost:5000/posts/", {
-            method: "POST",
+    const urlParams = new URLSearchParams(window.location.search);
+
+    try {
+        //PATCHes the JSON to the API
+        const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`, {
+            method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -68,64 +69,10 @@ async function updatePost() {
             throw new Error('API Error');
         }
 
-        //sends the user back to admin site
+        //sends the user back to index site
         window.location.replace('admin.html');
 
     } catch(error) {
         console.log(error);
-    } */
-
-
-
-
-
-/**
- * 
- * 
-    async function updatePun() {
-    const urlParams = new URLSearchParams(window.location.search);
-
-    //fetches the specific pun that should be updated
-    const response = await fetch(`https://puns-app.herokuapp.com/puns/${urlParams.get("id")}`);
-    const pun = await response.json();
-
-    //fills out the textbox with the text from the fetched pun
-    $('#content-textarea').val(pun.content);
-
-    $('#update-pun-form').submit(async function(e) {
-        e.preventDefault();
-
-        //snaps up the form
-        const formData = new FormData(e.target);
-        const contentObj = {
-            content: formData.get('content')
-        };
-        //converts the content to JSON
-        const JSONContent = JSON.stringify(contentObj);
-
-        try {
-            //PATCHes the JSON to the API in a new pun
-            const response = await fetch(`https://puns-app.herokuapp.com/puns/${urlParams.get("id")}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSONContent
-            });
-
-            if(!response.ok) {
-                throw new Error('API Error');
-            }
-
-            //sends the user back to index site
-            window.location.replace('index.html');
-
-        } catch(error) {
-            console.log(error);
-        }
-    });
+    }
 }
- * 
- * 
- */
-
