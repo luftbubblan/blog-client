@@ -9,6 +9,10 @@ async function fetchAllPosts() {
     const posts = await response.json();
     posts.reverse();
 
+    const a = await fetch('authors.txt');
+	  const b = await a.text();
+	  const approvedAuthors = b.split(",");
+
     if (!response.ok) {
       throw new Error("Error!");
     }
@@ -16,7 +20,7 @@ async function fetchAllPosts() {
     let html = "";
 
     posts.forEach((post) => {
-      if (trueAuthor(post.author)){
+      if (trueAuthor(post.author, approvedAuthors)){
         html += ` 
         <tr>
           <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
@@ -72,14 +76,7 @@ async function fetchAllPosts() {
   }
 }
 
-function trueAuthor(author) {
-	const approvedAuthors = [
-		'Malin',
-		'Anna',
-		'Oscar',
-		'Luftbubblan',
-		'Jonathan'
-	];
+function trueAuthor(author, approvedAuthors) {
 	for (let approvedAuthor of approvedAuthors) {
 		if(author === approvedAuthor) {
 			return true;
