@@ -10,16 +10,31 @@ async function readMore() {
   const post = await response.json();
   console.log(post);
 
-  $("#main-content").html(
+  $("#blogPost").html(
     `
-			<h2>${post.title}</h2>
+			<h2 class="post-title">${post.title}</h2>
 			
-			<span id="author">Author: ${post.author}</span>
+			<span id="author">By: ${post.author}</span>
 		
-			<p>${post.content}</p>
+			<p class="post-content">${post.content}</p>
 
-			<span id="date">${post.date.slice(0, 10)} ${post.date.slice(11, 16)}</span>
-			<div id="tags">Tags:${post.tags}</div>
+			<div id="tags">
+        Published: ${post.date.slice(0, 10)} ${post.date.slice(11, 16)} <br>
+        Tags: ${showTagsCapitalizeAddSpace(post.tags)}
+      </div>
 		`
   );
+}
+
+//function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
+function showTagsCapitalizeAddSpace(array) {
+  if (array === null) {
+    return "";
+  } else if (array.length !== 0) {
+    return `${array
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(", ")}`;
+  } else {
+    return "";
+  }
 }
