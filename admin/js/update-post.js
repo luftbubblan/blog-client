@@ -1,6 +1,6 @@
 window.onload = function () {
     fetchPost();
-    // $('#updatePostForm').submit(updatePost);
+    $('#updatePostForm').submit(updatePost);
 }
 
 async function fetchPost() {
@@ -15,7 +15,7 @@ async function fetchPost() {
     document.querySelector('#inputDiv input').value = post.title;
     document.querySelectorAll('#inputDiv input')[1].value = post.author;
     document.querySelector('#contentTextarea').value = post.content;
-    let allTags = document.querySelectorAll('.checkBox')
+    let allTags = document.querySelectorAll('.checkbox')
     console.log(post.tags)
 
     for (let tag of allTags) {
@@ -26,6 +26,11 @@ async function fetchPost() {
             }
         }  
     }
+}
+
+async function updatePost() {
+    
+}
 
 
 
@@ -69,7 +74,7 @@ async function fetchPost() {
     } catch(error) {
         console.log(error);
     } */
-}
+
 
 
 

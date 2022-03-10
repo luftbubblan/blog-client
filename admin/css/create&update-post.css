@@ -68,8 +68,9 @@ textarea {
 
 #submitBtn:hover {
 	cursor: pointer;
-	background-color: #92a081;
-	border-color: #384428;
+	background-color: #528b68;
+	border-color: #2f662fd0;
+	color: white;
 }
 
 a {
