@@ -5,7 +5,7 @@ window.onload = function () {
 async function fetchAllBplogPosts() {
   const response = await fetch("http://localhost:5000/posts/");
   const posts = await response.json();
-  console.log(posts);
+  posts.reverse();
   let output = "";
 
   //iterates all posts and creates the html for them
@@ -29,13 +29,13 @@ async function fetchAllBplogPosts() {
       11,
       16
     )}</i></span>
-			${showTags(blogPost.tags)} 
+			${showTagsCapitalizeAddSpace(blogPost.tags)} 
 			
 			</li>
 		`;
 
     //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
-    function showTags(array) {
+    function showTagsCapitalizeAddSpace(array) {
       if (array === null) {
         return "";
       } else if (array.length !== 0) {
