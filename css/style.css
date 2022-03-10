@@ -1,3 +1,7 @@
 * {
 	font-family: 'Hubballi', cursive;
 }
+
+.checkBox:checked {
+	color: orchid;
+}

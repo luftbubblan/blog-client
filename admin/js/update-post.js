@@ -1,16 +1,33 @@
 window.onload = function () {
-    $('#updatePostForm').submit(updatePost);
+    fetchPost();
+    // $('#updatePostForm').submit(updatePost);
 }
 
-async function updatePost(e) {
-    e.preventDefault();
+async function fetchPost() {
 
     const urlParams = new URLSearchParams(window.location.search);
 
     //fetches the specific pun that should be updated
     const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`);
     const post = await response.json();
-    console.log(post)
+    console.log(post);
+
+    document.querySelector('#inputDiv input').value = post.title;
+    document.querySelectorAll('#inputDiv input')[1].value = post.author;
+    document.querySelector('#contentTextarea').value = post.content;
+    let allTags = document.querySelectorAll('.checkBox')
+    console.log(post.tags)
+
+    for (let tag of allTags) {
+        console.log(tag)
+        for (let postTag of post.tags) {
+            if (tag.value === postTag){
+                tag.checked = true;
+            }
+        }  
+    }
+
+
 
     //fills out the textbox with the text from the fetched pun
     // $('#content-textarea').val(pun.content);
