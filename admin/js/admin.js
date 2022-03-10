@@ -7,7 +7,7 @@ async function fetchAllPosts() {
   try {
     const response = await fetch("http://localhost:5000/posts/");
     const posts = await response.json();
-    console.log(posts[6].tags);
+    posts.reverse();
 
     if (!response.ok) {
       throw new Error("Error!");
@@ -20,7 +20,7 @@ async function fetchAllPosts() {
       <tr>
         <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
         <td>${post.author}</td>
-        <td>${showTags(post.tags)}</td>
+        <td>${showTagsCapitalizeAddSpace(post.tags)}</td>
         <td>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</td>
         <td><a href="update-post.html?id=${
           post._id
@@ -32,7 +32,7 @@ async function fetchAllPosts() {
     });
 
     //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
-    function showTags(array) {
+    function showTagsCapitalizeAddSpace(array) {
       if (array === null) {
         return "";
       } else if (array.length !== 0) {
