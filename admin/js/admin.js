@@ -16,19 +16,21 @@ async function fetchAllPosts() {
     let html = "";
 
     posts.forEach((post) => {
-      html += ` 
-      <tr>
-        <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
-        <td>${post.author}</td>
-        <td>${showTagsCapitalizeAddSpace(post.tags)}</td>
-        <td>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</td>
-        <td><a href="update-post.html?id=${
+      if (trueAuthor(post.author)){
+        html += ` 
+        <tr>
+          <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
+          <td>${post.author}</td>
+          <td>${showTagsCapitalizeAddSpace(post.tags)}</td>
+          <td>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</td>
+          <td><a href="update-post.html?id=${
+            post._id
+          }">Update</a> / <a href="#" class="delete-task" data-task-id="${
           post._id
-        }">Update</a> / <a href="#" class="delete-task" data-task-id="${
-        post._id
-      }">Delete</a></td>
-      </tr>
-      `;
+        }">Delete</a></td>
+        </tr>
+        `;
+      }
     });
 
     //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
@@ -68,4 +70,20 @@ async function fetchAllPosts() {
       }
     });
   }
+}
+
+function trueAuthor(author) {
+	const approvedAuthors = [
+		'Malin',
+		'Anna',
+		'Oscar',
+		'Luftbubblan',
+		'Jonathan'
+	];
+	for (let approvedAuthor of approvedAuthors) {
+		if(author === approvedAuthor) {
+			return true;
+		}
+	}
+	return false;
 }
