@@ -10,14 +10,11 @@ async function readMore() {
   const post = await response.json();
   console.log(post);
 
-  $("body").html(
+  $("#main-content").html(
     `
-            <a href="index.html">Home</a>
-            <span>/</span>
-            <a href="/admin/admin.html">Admin</a>
 			<h2>${post.title}</h2>
 			
-			<span id="author">${post.author}</span>
+			<span id="author">Author: ${post.author}</span>
 		
 			<p>${post.content}</p>
 
