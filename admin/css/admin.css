@@ -4,9 +4,13 @@
 
 body {
   width: 920px;
-  margin: 30px auto;
+  margin: auto;
+  background-color: #f0f3f6;
 }
-
+nav {
+  margin-top: 10px;
+  min-height: 2vh;
+}
 .top-info-container {
   display: flex;
   justify-content: space-between;

@@ -16,7 +16,7 @@ async function fetchAllBplogPosts() {
 			<h2>${blogPost.title}</h2>
 
 			
-			<span id="author">${blogPost.author}</span>
+			<span id="author">By: <i>${blogPost.author}</i></span>
 		
   
 			<p>
@@ -25,10 +25,10 @@ async function fetchAllBplogPosts() {
 						
 			</p>
 
-			<span id="date">${blogPost.date.slice(0, 10)} - ${blogPost.date.slice(
+			<span id="date"><i>${blogPost.date.slice(0, 10)} - ${blogPost.date.slice(
       11,
       16
-    )}</span>
+    )}</i></span>
 			${showTags(blogPost.tags)} 
 			
 			</li>
