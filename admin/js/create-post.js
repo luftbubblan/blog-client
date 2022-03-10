@@ -19,7 +19,8 @@ async function createPost(e) {
         title: formData.get('title'),
         author: formData.get('author'),
         content: formData.get('content'),
-        tags: allTags
+        tags: allTags,
+        image: "some-image.jpg"
     };
     
     //converts the content to JSON
