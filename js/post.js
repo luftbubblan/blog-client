@@ -12,7 +12,7 @@ async function readMore() {
 
   $("body").html(
     `
-            <a href="index.html">Blog feed</a>
+            <a href="index.html">Home</a>
             <span>/</span>
             <a href="/admin/admin.html">Admin</a>
 			<h2>${post.title}</h2>
