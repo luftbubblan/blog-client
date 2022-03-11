@@ -23,12 +23,10 @@ async function fetchAllPosts() {
 
 				//if over 100 leters show only 100 and add ...
 				if(post.content.length > 100) {
-					console.log("over 100");
 					post.content = post.content.slice(0, 100) + "...";
 
 				//else show all
 				} else {
-					console.log("under 100");
 					post.content = post.content;
 				}
 
