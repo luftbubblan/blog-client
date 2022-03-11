@@ -2,6 +2,10 @@
 	font-family: 'Hubballi', cursive;
 }
 
+body {
+  	background-color: #ebebeb;
+}
+
 a {
 	text-decoration: none;
   font-size: 18px;
