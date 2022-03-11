@@ -76,6 +76,7 @@ async function updatePost(e) {
     } else {
         $('#titleError').attr('hidden', 'true');
     }
+
     if (contentObj.content.trim() === "") {
         $('#contentError').html('<div>You can not submit empty Content</div>')
         $('#contentError').removeAttr('hidden');
@@ -83,6 +84,7 @@ async function updatePost(e) {
     } else {
         $('#contentError').attr('hidden', 'true');
     }
+    
     if(emptyField) {
         return false
     }

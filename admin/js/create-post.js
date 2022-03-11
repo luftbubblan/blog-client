@@ -25,9 +25,6 @@ async function createPost(e) {
         allTags.push(tag);
     })
     
-
-
-    
     const contentObj = {
         title: formData.get('title'),
         author: formData.get('author'),
@@ -46,6 +43,7 @@ async function createPost(e) {
     } else {
         $('#titleError').attr('hidden', 'true');
     }
+
     if (contentObj.content.trim() === "") {
         $('#contentError').html('<div>You can not submit empty Content</div>')
         $('#contentError').removeAttr('hidden');
@@ -53,6 +51,7 @@ async function createPost(e) {
     } else {
         $('#contentError').attr('hidden', 'true');
     }
+    
     if(emptyField) {
         return false
     }
