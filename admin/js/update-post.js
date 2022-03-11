@@ -70,10 +70,16 @@ async function updatePost(e) {
     //if they contain stuff remove error
     emptyField = false
     if(contentObj.title.trim() === "") {
-        $('#titleError').html('<div>You can not submit an empty Title</div>')
+        $('#titleError').html('<div>You can not submit an empty Title</div>');
         $('#titleError').removeAttr('hidden');
         emptyField = true;
-    } else {
+    } else if(contentObj.title.trim().length > 60) {
+        console.log("more then 10");
+        $('#titleError').html('<div>The Title can only be 60 characters long</div>');
+        $('#titleError').removeAttr('hidden');
+        emptyField = true;
+    } 
+    else {
         $('#titleError').attr('hidden', 'true');
     }
 
@@ -84,7 +90,7 @@ async function updatePost(e) {
     } else {
         $('#contentError').attr('hidden', 'true');
     }
-    
+
     if(emptyField) {
         return false
     }
