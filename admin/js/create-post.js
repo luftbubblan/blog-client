@@ -36,6 +36,27 @@ async function createPost(e) {
         image: "some-image.jpg"
     };
     
+    //if title or content is just containing spaces cancel function
+    //if they contain stuff remove error
+    emptyField = false
+    if(contentObj.title.trim() === "") {
+        $('#titleError').html('<div>You can not submit an empty Title</div>')
+        $('#titleError').removeAttr('hidden');
+        emptyField = true;
+    } else {
+        $('#titleError').attr('hidden', 'true');
+    }
+    if (contentObj.content.trim() === "") {
+        $('#contentError').html('<div>You can not submit empty Content</div>')
+        $('#contentError').removeAttr('hidden');
+        emptyField = true;
+    } else {
+        $('#contentError').attr('hidden', 'true');
+    }
+    if(emptyField) {
+        return false
+    }
+    
     //converts the content to JSON
     const JSONContent = JSON.stringify(contentObj);
 

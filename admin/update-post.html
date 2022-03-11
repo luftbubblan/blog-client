@@ -20,26 +20,27 @@
 
         <form id="updatePostForm">
             <div id="inputDiv">
-                <div>
+                <div class="innerInputDiv">
                     <label for="title">Title</label>
-                    <input class="inputField" type="text" name="title">
+                    <input class="inputField" type="text" name="title" required>
+                    <div id="titleError" class="errors" hidden></div>
                 </div>
                 
-                <div>
+                <div class="innerInputDiv">
                     <label for="author">Author</label>
                     <select id="authorList" name="author" required>
-                        
                     </select>
                 </div>
             </div>
 
             <div id="contentDiv">
                 <label for="content">Content</label>
-                <textarea name="content" id="contentTextarea" cols="30" rows="20"></textarea>
+                <textarea name="content" id="contentTextarea" cols="30" rows="20" required></textarea>
+                <div id="contentError" class="errors" hidden></div>
             </div>
 
-            <div id="tagsDiv">
-                <label for="tags">Tags</label><br>
+            <div id="tagsDiv" required>
+                <label for="tags" required>Tags</label><br>
                 <input name="tags" class="checkbox" type="checkbox" value="herb">Herb
                 <input name="tags" class="checkbox" type="checkbox" value="flowers">Flowers
                 <input name="tags" class="checkbox" type="checkbox" value="trees">Trees
@@ -49,7 +50,7 @@
                 <input name="tags" class="checkbox" type="checkbox" value="architecture">Architecture
             </div>
 
-            <input type="submit" id="submitBtn" value="Update"><br>
+            <input type="submit" id="submitBtn" value="Post new"><br>
         </form>
     </div>
 

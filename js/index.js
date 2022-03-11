@@ -18,17 +18,13 @@ async function fetchAllPosts() {
 		$.each(posts, function (key, post) {
 			if (trueAuthor(post.author, approvedAuthors)) {
 				//removes all . from the back of the string
-				while (post.content[post.content.length-1] === ".")
-				post.content = post.content.slice(0,-1);
+				while (post.content[post.content.length - 1] === ".")
+					post.content = post.content.slice(0,-1);
 
 				//if over 100 leters show only 100 and add ...
 				if(post.content.length > 100) {
 					post.content = post.content.slice(0, 100) + "...";
-
-				//else show all
-				} else {
-					post.content = post.content;
-				}
+				} 
 
 				//creates the output
 				output += `

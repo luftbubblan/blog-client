@@ -23,8 +23,21 @@ label {
 	justify-content: space-between;
 }
 
-#inputDiv div {
+.innerInputDiv {
 	width: 45%;
+}
+
+.errors {
+	background-color: #f8d7da;
+	border: 1px solid #f5c8cd;
+	padding: 5px;
+	margin-top: 10px;
+	color: #83333b;
+	font-size: 18px;
+}
+
+#contentError {
+	max-width: 40%;
 }
 
 .inputField {
@@ -33,7 +46,19 @@ label {
 	border-radius: 5px;
 	border: 1px solid #333;
 	font-size: 18px;
-	padding: 5px;
+	padding-left: 5px;
+	height: 30px;
+    vertical-align: middle;
+}
+
+#authorList {
+	margin-top: 10px;
+	width: 100%;
+	border-radius: 5px;
+	border: 1px solid #333;
+	font-size: 18px;
+	height: 30px;
+    vertical-align: middle;
 }
 
 #contentDiv {
