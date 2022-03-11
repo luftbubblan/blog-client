@@ -12,7 +12,7 @@ async function fetchAllPosts() {
 		const authorsText = await authors.text();
 		const approvedAuthors = authorsText.split(",");
 	
-		let output = "";
+		let output = [];
 	
 		//iterates all posts and creates the html for them
 		$.each(posts, function (key, post) {
@@ -27,9 +27,9 @@ async function fetchAllPosts() {
 				} 
 
 				//creates the output
-				output += `
+				output.push(`
 					<li class="post" data-id="${post._id}">
-						<h2>${post.title}</h2>
+						<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
 		
 						<span id="author">By: <i>${post.author}</i></span>
 		
@@ -43,30 +43,54 @@ async function fetchAllPosts() {
 						</span>
 						${showTagsCapitalizeAddSpace(post.tags)} 
 					</li>
-				`;
-		}
+				`);
+			}
 		});
 
-		//posts the output tot he site in the ul
-		$("#post-list").html(output);
+		let i = 0;
+		let j = 10;
+		//posts the 10 latest posts to he site in the ul
+		for(;i < j;i++) {
+			$("#post-list").append(output[i]);
+		}
+
+		//if all posts are loaded(less then 10) show message otherwise show load more btn
+		if(output.length <= 10) {
+			$("#container").append('<div id="allPostsLoaded">All posts are loaded</div>');
+		} else {
+			$('button').removeAttr('hidden');
+		}
+		
+		//on click load 10 more posts or show that there are no more posts
+		$('button').click(function() {
+			j += 10;
+			for(;i < j; i++) {
+				$("#post-list").append(output[i]);
+			}
+			if(output.length == $('li').length) {
+				$("#container").append('<div id="allPostsLoaded">All posts are loaded</div>');
+				$('button').attr('hidden', 'true');
+			}
+		});
 	}
 
 	catch(error) {
 		console.log(error);
 	}
-	//function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
-	function showTagsCapitalizeAddSpace(array) {
-		if (array === null) {
-			return "";
-		} else if (array.length !== 0) {
-			return `
-				<div id='tags'>Tags: 
-				${array.map((w) => w.charAt(0).toUpperCase()
-				+ w.slice(1)).join(", ")}
-			`;
-		} else {
-			return "";
-		}
+}
+
+//function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
+function showTagsCapitalizeAddSpace(array) {
+	if (array === null) {
+		return "";
+	} else if (array.length !== 0) {
+		return `
+			<div id='tags'>Tags: 
+			${array.map((w) => w.charAt(0).toUpperCase()
+			+ w.slice(1)).join(", ")}
+		`;
+	} else {
+		return "";
 	}
 }
 
