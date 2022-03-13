@@ -20,10 +20,27 @@ async function gettingAndHandelingData() {
 
       let postList = "";
 
-      for (let i = 0; i < 5; i++) {
+      const filterByAuthor = data[0].filter((element) => {
+        return (
+          element.author === "Malin" ||
+          element.author === "Anna" ||
+          element.author === "Oscar" ||
+          element.author === "Luftbubblan" ||
+          element.author === "Jonathan"
+        );
+      });
+
+      filterByAuthor.reverse();
+
+      let counter = 0;
+      for (let author of filterByAuthor) {
+        counter++;
+        if (counter === 6) {
+          break;
+        }
         postList += `
-      <a href="#"><li>${data[0][i].title}</li></a>
-      `;
+        <a href="#"><li>${author.title}</li></a>
+        `;
       }
 
       $("#main-content").html(
@@ -37,8 +54,7 @@ async function gettingAndHandelingData() {
             Published: ${data[1].date.slice(0, 10)} ${data[1].date.slice(
           11,
           16
-        )} <br>
-            Tags: ${showTagsCapitalizeAddSpace(data[1].tags)}
+        )}
         </div>
       </div>
         <aside id="sidebar">
@@ -48,6 +64,7 @@ async function gettingAndHandelingData() {
           <ul>
           ${postList}
           </ul>
+          Tags: ${showTagsCapitalizeAddSpace(data[1].tags)}
         </aside>
       </div>
       `
