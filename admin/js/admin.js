@@ -1,4 +1,5 @@
-//running function to get all the posts on load
+"use strict";
+
 window.onload = () => fetchAllPosts();
 
 const errDiv = document.querySelector("#errDiv");
@@ -9,9 +10,9 @@ async function fetchAllPosts() {
     const posts = await response.json();
     posts.reverse();
 
-    const authors = await fetch('authors.txt');
-		const authorsText = await authors.text();
-		const approvedAuthors = authorsText.split(",");
+    const authors = await fetch("authors.txt");
+    const authorsText = await authors.text();
+    const approvedAuthors = authorsText.split(",");
 
     if (!response.ok) {
       throw new Error("Error!");
@@ -20,7 +21,7 @@ async function fetchAllPosts() {
     let html = "";
 
     posts.forEach((post) => {
-      if (trueAuthor(post.author, approvedAuthors)){
+      if (trueAuthor(post.author, approvedAuthors)) {
         html += ` 
         <tr>
           <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
@@ -77,10 +78,10 @@ async function fetchAllPosts() {
 }
 
 function trueAuthor(author, approvedAuthors) {
-	for (let approvedAuthor of approvedAuthors) {
-		if(author === approvedAuthor) {
-			return true;
-		}
-	}
-	return false;
+  for (let approvedAuthor of approvedAuthors) {
+    if (author === approvedAuthor) {
+      return true;
+    }
+  }
+  return false;
 }

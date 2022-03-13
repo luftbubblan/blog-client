@@ -1,77 +1,74 @@
 * {
-  	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 body {
-  	margin: 0;
+  margin: 0;
 }
 
 header {
-	background-color: #528b68;
-	color: rgb(247, 231, 199);
+  background-color: #528b68;
+  color: rgb(247, 231, 199);
 }
 
 nav {
-	width: 920px;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  width: 960px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 nav a {
-  	color: white;
-}
-
-h1 {
-  	margin-left: 37px;
+  color: white;
 }
 
 #latest-headline {
-  	text-align: center;
+  text-align: center;
+  margin-top: 40px;
 }
 
 #container {
-	display: flex;
-	flex-direction: column;
-	width: 920px;
-	margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 960px;
+  margin: 0 auto;
 }
 
 #meta-data {
-  	margin-bottom: 30px;
+  margin-bottom: 30px;
 }
 
 #post-list {
-	list-style: none;
-	padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .post {
-	border: 1px solid black;
-	margin: 10px 0px;
-	padding: 0 0 10px 10px;
+  border: 1px solid black;
+  margin: 10px 0px;
+  padding: 0 0 10px 10px;
 }
 
 button {
-	font-size: 22px;
-	transition: 0.7s;
-	margin: 30px 0 50px 0;
-	width: 180px;
-	height: 50px;
-	align-self: center;
-	border-radius: 10px;
+  font-size: 22px;
+  transition: 0.7s;
+  margin: 30px 0 50px 0;
+  width: 180px;
+  height: 50px;
+  align-self: center;
+  border-radius: 10px;
 }
 
 button:hover {
-	cursor: pointer;
-	background-color: #528b68;
-	border-color: #2f662fd0;
-	color: white;
+  cursor: pointer;
+  background-color: #528b68;
+  border-color: #2f662fd0;
+  color: white;
 }
 
 #allPostsLoaded {
-	font-size: 20px;
-	margin: 30px 0 50px 0;
-	align-self: center;
+  font-size: 20px;
+  margin: 30px 0 50px 0;
+  align-self: center;
 }
