@@ -12,26 +12,26 @@ async function fetchAllPosts() {
     const authorsText = await authors.text();
     const approvedAuthors = authorsText.split(",");
 
-	let topOutput = "";
-	let topPostNotPrinted = true;
-	
-	// appends the first (latest) post to the top, only shows the 2000 first letters, adds ... if more than 2000
-	while(topPostNotPrinted) {
-		$.each(posts, function (key, post) {
-			if (trueAuthor(post.author, approvedAuthors)) {
-				const img = JSON.parse(post.image)
-				//removes all . from the back of the string
-				while (post.content[post.content.length - 1] === ".") {
-					post.content = post.content.slice(0, -1);
-				}
+    let topOutput = "";
+    let topPostNotPrinted = true;
 
-				//if over 2000 leters show only 2000 and add ...
-				let showReadMore = false;
-				if (post.content.length > 2000) {
-					post.content = post.content.slice(0, 2000) + "...";
-					showReadMore = true;
-				}
-				topOutput = (`
+    // appends the first (latest) post to the top, only shows the 2000 first letters, adds ... if more than 2000
+    while (topPostNotPrinted) {
+      $.each(posts, function (key, post) {
+        if (trueAuthor(post.author, approvedAuthors)) {
+          const img = JSON.parse(post.image);
+          //removes all . from the back of the string
+          while (post.content[post.content.length - 1] === ".") {
+            post.content = post.content.slice(0, -1);
+          }
+
+          //if over 2000 leters show only 2000 and add ...
+          let showReadMore = false;
+          if (post.content.length > 2000) {
+            post.content = post.content.slice(0, 2000) + "...";
+            showReadMore = true;
+          }
+          topOutput = `
 				<li class="post" data-id="${post._id}">
 					<a href="post.html?id=${post._id}"><h2 id="title"></h2></a>
 					
@@ -50,37 +50,37 @@ async function fetchAllPosts() {
 					</div>
 					${showTagsCapitalizeAddSpace(post.tags)}
 				</li>
-				`)
-				if(showReadMore) {
-					$('#readMore').append('Read more')
-				}
-				$('#top-post').append(topOutput);
-				$('#title').text(post.title);
-				$('#content').text(post.content);
-				topPostNotPrinted = false;
-				return false;
-			}
-		});
-		topPostNotPrinted = false;
-	}
-	
-	let output = [];
+				`;
+          if (showReadMore) {
+            $("#readMore").append("Read more");
+          }
+          $("#top-post").append(topOutput);
+          $("#title").text(post.title);
+          $("#content").text(post.content);
+          topPostNotPrinted = false;
+          return false;
+        }
+      });
+      topPostNotPrinted = false;
+    }
+
+    let output = [];
 
     //iterates all posts except the first one and creates the html for them
     $.each(posts, function (key, post) {
-      	if (trueAuthor(post.author, approvedAuthors)) {
-			//removes all . from the back of the string
-			while (post.content[post.content.length - 1] === ".") {
-				post.content = post.content.slice(0, -1);
-			}
+      if (trueAuthor(post.author, approvedAuthors)) {
+        //removes all . from the back of the string
+        while (post.content[post.content.length - 1] === ".") {
+          post.content = post.content.slice(0, -1);
+        }
 
-			//if over 100 leters show only 100 and add ...
-			if (post.content.length > 100) {
-				post.content = post.content.slice(0, 100) + "...";
-			}
+        //if over 100 leters show only 100 and add ...
+        if (post.content.length > 100) {
+          post.content = post.content.slice(0, 100) + "...";
+        }
 
-			//creates the output without the first post
-			output.push(`
+        //creates the output without the first post
+        output.push(`
 				<li class="post" data-id="${post._id}">
 					<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
 	
@@ -97,7 +97,7 @@ async function fetchAllPosts() {
 					${showTagsCapitalizeAddSpace(post.tags)} 
 				</li>
 			`);
-      	}
+      }
     });
 
     let i = 1;
