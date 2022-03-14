@@ -24,15 +24,20 @@ async function createPost(e) {
     $.each(formData.getAll('tags'), function(key, tag) {
         allTags.push(tag);
     })
+
+    //fetches a random gardening pictures URL
+    const response = await fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening');
+    const data = await response.json();
+    const gardeningImageURL = data.links.download
     
+
     const contentObj = {
         title: formData.get('title'),
         author: formData.get('author'),
         content: formData.get('content'),
         tags: allTags,
-        image: "some-image.jpg"
+        image: gardeningImageURL
     };
-
     
     //if title or content is just containing spaces cancel function
     //if they contain stuff remove error

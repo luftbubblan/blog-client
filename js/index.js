@@ -13,38 +13,77 @@ async function fetchAllPosts() {
     const approvedAuthors = authorsText.split(",");
 
     let output = [];
+	let topOutput = "";
+	let topPostNotPrinted = true;
 
-    //iterates all posts and creates the html for them
+	
+	
+	
+	console.log("test")
+	// appends the first (latest) post to the top, only shows the 2000 first letters, adds ... if more than 2000
+	while(topPostNotPrinted) {
+		$.each(posts, function (key, post) {
+			if (trueAuthor(post.author, approvedAuthors)) {
+				if (post.content.length > 2000) {
+					post.content = post.content.slice(0, 2000) + "...";
+				}
+				topOutput = (`
+				<li class="post" data-id="${post._id}">
+				<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
+				
+				<span id="author">By: <i>${post.author}</i></span>
+				
+				<p>
+				${post.content}<br>
+				<a href="post.html?id=${post._id}">Show Post</a>		
+				</p>
+				
+				<span id="date">
+				<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
+				</span>
+				${showTagsCapitalizeAddSpace(post.tags)}<br>
+				<img src="${post.image}">
+				</li>
+				`)
+				topPostNotPrinted = false;
+				return false;
+			}
+		});
+		$('#top-post').append(topOutput)
+	}
+
+    //iterates all posts except the first one and creates the html for them
     $.each(posts, function (key, post) {
-      if (trueAuthor(post.author, approvedAuthors)) {
-        //removes all . from the back of the string
-        while (post.content[post.content.length - 1] === ".")
-          post.content = post.content.slice(0, -1);
+      	if (trueAuthor(post.author, approvedAuthors)) {
+			//removes all . from the back of the string
+			while (post.content[post.content.length - 1] === ".") {
+				post.content = post.content.slice(0, -1);
+			}
 
-        //if over 100 leters show only 100 and add ...
-        if (post.content.length > 100) {
-          post.content = post.content.slice(0, 100) + "...";
-        }
+			//if over 100 leters show only 100 and add ...
+			if (post.content.length > 100) {
+				post.content = post.content.slice(0, 100) + "...";
+			}
 
-        //creates the output
-        output.push(`
-					<li class="post" data-id="${post._id}">
-						<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
-		
-						<span id="author">By: <i>${post.author}</i></span>
-		
-						<p>
-							${post.content}<br>
-							<a href="post.html?id=${post._id}">Show Post</a>		
-						</p>
-		
-						<span id="date">
-							<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
-						</span>
-						${showTagsCapitalizeAddSpace(post.tags)} 
-					</li>
-				`);
-      }
+			//creates the output without the first post
+			output.push(`
+				<li class="post" data-id="${post._id}">
+					<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
+	
+					<span id="author">By: <i>${post.author}</i></span>
+	
+					<p>
+						${post.content}<br>
+						<a href="post.html?id=${post._id}">Show Post</a>		
+					</p>
+	
+					<span id="date">
+						<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
+					</span>
+					${showTagsCapitalizeAddSpace(post.tags)} 
+				</li>
+			`);
+      	}
     });
 
     let i = 0;
