@@ -7,6 +7,7 @@ async function fetchAllPosts() {
     const response = await fetch("http://localhost:5000/posts/");
     const posts = await response.json();
     posts.reverse();
+    console.log(posts);
 
     const authors = await fetch("admin/authors.txt");
     const authorsText = await authors.text();
@@ -18,8 +19,8 @@ async function fetchAllPosts() {
     // appends the first (latest) post to the top, only shows the 2000 first letters, adds ... if more than 2000
     while (topPostNotPrinted) {
       $.each(posts, function (key, post) {
+        const img = JSON.parse(post.image);
         if (trueAuthor(post.author, approvedAuthors)) {
-          const img = JSON.parse(post.image);
           //removes all . from the back of the string
           while (post.content[post.content.length - 1] === ".") {
             post.content = post.content.slice(0, -1);
