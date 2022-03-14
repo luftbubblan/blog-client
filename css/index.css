@@ -23,8 +23,6 @@ nav a {
   	color: white;
 }
 
-
-
 #container {
 	display: flex;
 	flex-direction: column;
@@ -43,13 +41,28 @@ nav a {
 }
 
 #top-post li{
-	text-align: center;
-	height: 500px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 0 70px 50px 70px;
+}
+
+#showPost {
+	font-size: 20px;
+	align-self: flex-start;
+	margin-left: 50px;
+	margin-top: 50px;
+}
+
+#content {
+	font-size: 18px;
 }
 
 #top-post li img{
-	text-align: center;
-	height: 200px;
+	height: 300px;
+	border-radius: 15px;
+	margin-top: 50px;
+	margin-bottom: 20px;
 }
 
 #latest-headline {

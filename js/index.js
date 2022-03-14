@@ -12,14 +12,9 @@ async function fetchAllPosts() {
     const authorsText = await authors.text();
     const approvedAuthors = authorsText.split(",");
 
-    let output = [];
 	let topOutput = "";
 	let topPostNotPrinted = true;
-
 	
-	
-	
-	console.log("test")
 	// appends the first (latest) post to the top, only shows the 2000 first letters, adds ... if more than 2000
 	while(topPostNotPrinted) {
 		$.each(posts, function (key, post) {
@@ -29,28 +24,35 @@ async function fetchAllPosts() {
 				}
 				topOutput = (`
 				<li class="post" data-id="${post._id}">
-				<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
-				
-				<span id="author">By: <i>${post.author}</i></span>
-				
-				<p>
-				${post.content}<br>
-				<a href="post.html?id=${post._id}">Show Post</a>		
-				</p>
-				
-				<span id="date">
-				<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
-				</span>
-				${showTagsCapitalizeAddSpace(post.tags)}<br>
-				<img src="${post.image}">
+					<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
+					
+					<div id="author">
+						By: <i>${post.author}</i>
+					</div>
+						
+					<a href="post.html?id=${post._id}" id="showPost">Show Post</a>
+					
+					<p id="content">${post.content}</p>
+
+					
+					<img src="${post.image}">
+
+					<div id="date">
+						<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
+					</div>
+					${showTagsCapitalizeAddSpace(post.tags)}
 				</li>
 				`)
-				topPostNotPrinted = false;
-				return false;
 			}
+			console.log(posts.length)
+			topPostNotPrinted = false;
+			return false;
 		});
+		topPostNotPrinted = false;
 		$('#top-post').append(topOutput)
 	}
+	
+	let output = [];
 
     //iterates all posts except the first one and creates the html for them
     $.each(posts, function (key, post) {
@@ -86,15 +88,15 @@ async function fetchAllPosts() {
       	}
     });
 
-    let i = 0;
-    let j = 10;
-    //posts the 10 latest posts to he site in the ul
+    let i = 1;
+    let j = 6;
+    //posts the 6 latest posts to he site in the ul
     for (; i < j; i++) {
       $("#post-list").append(output[i]);
     }
 
-    //if all posts are loaded(less then 10) show message otherwise show load more btn
-    if (output.length <= 10) {
+    //if all posts are loaded(less then 6) show message otherwise show load more btn
+    if (output.length <= 6) {
       $("#container").append(
         '<div id="allPostsLoaded">All posts are loaded</div>'
       );
@@ -102,9 +104,9 @@ async function fetchAllPosts() {
       $("button").removeAttr("hidden");
     }
 
-    //on click load 10 more posts or show that there are no more posts
+    //on click load 5 more posts or show that there are no more posts
     $("button").click(function () {
-      j += 10;
+      j += 5;
       for (; i < j; i++) {
         $("#post-list").append(output[i]);
       }
