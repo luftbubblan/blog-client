@@ -19,6 +19,13 @@ async function fetchAllPosts() {
 	while(topPostNotPrinted) {
 		$.each(posts, function (key, post) {
 			if (trueAuthor(post.author, approvedAuthors)) {
+				const img = JSON.parse(post.image)
+				//removes all . from the back of the string
+				while (post.content[post.content.length - 1] === ".") {
+					post.content = post.content.slice(0, -1);
+				}
+
+				//if over 2000 leters show only 2000 and add ...
 				if (post.content.length > 2000) {
 					post.content = post.content.slice(0, 2000) + "...";
 				}
@@ -30,12 +37,11 @@ async function fetchAllPosts() {
 						By: <i>${post.author}</i>
 					</div>
 						
-					<a href="post.html?id=${post._id}" id="showPost">Show Post</a>
 					
 					<p id="content">${post.content}</p>
+					<a href="post.html?id=${post._id}" id="showPost">Show Post</a>
 
-					
-					<img src="${post.image}">
+					<img src="${img.urls.small}" alt="${img.alt_description}">
 
 					<div id="date">
 						<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
@@ -44,7 +50,6 @@ async function fetchAllPosts() {
 				</li>
 				`)
 			}
-			console.log(posts.length)
 			topPostNotPrinted = false;
 			return false;
 		});
@@ -57,14 +62,22 @@ async function fetchAllPosts() {
     //iterates all posts except the first one and creates the html for them
     $.each(posts, function (key, post) {
       	if (trueAuthor(post.author, approvedAuthors)) {
+			//if over 100 leters show only 100 and add ...
+			// console.log(post.content.length)
+			if (post.content.length > 100) {
+				post.content = post.content.slice(0, 100);
+			}
+			
 			//removes all . from the back of the string
+			// console.log(post.content.length)
 			while (post.content[post.content.length - 1] === ".") {
 				post.content = post.content.slice(0, -1);
 			}
-
+			
 			//if over 100 leters show only 100 and add ...
+			// console.log(post.content.length)
 			if (post.content.length > 100) {
-				post.content = post.content.slice(0, 100) + "...";
+				post.content += "...";
 			}
 
 			//creates the output without the first post

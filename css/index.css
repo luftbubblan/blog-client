@@ -8,7 +8,7 @@ body {
 
 header {
   	background-color: #528b68;
-  	color: rgb(247, 231, 199);
+  	color: white;
 }
 
 nav {
@@ -61,7 +61,7 @@ nav a {
 #top-post li img{
 	height: 300px;
 	border-radius: 15px;
-	margin-top: 50px;
+	margin-top: 30px;
 	margin-bottom: 20px;
 }
 

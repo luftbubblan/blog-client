@@ -25,10 +25,9 @@ async function createPost(e) {
         allTags.push(tag);
     })
 
-    //fetches a random gardening pictures URL
+    //fetches a random gardening picture
     const response = await fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening');
-    const data = await response.json();
-    const gardeningImageURL = data.links.download
+    const gardeningImage = JSON.stringify(await response.json());
     
 
     const contentObj = {
@@ -36,7 +35,7 @@ async function createPost(e) {
         author: formData.get('author'),
         content: formData.get('content'),
         tags: allTags,
-        image: gardeningImageURL
+        image: gardeningImage
     };
     
     //if title or content is just containing spaces cancel function
