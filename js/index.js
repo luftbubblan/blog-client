@@ -62,22 +62,14 @@ async function fetchAllPosts() {
     //iterates all posts except the first one and creates the html for them
     $.each(posts, function (key, post) {
       	if (trueAuthor(post.author, approvedAuthors)) {
-			//if over 100 leters show only 100 and add ...
-			// console.log(post.content.length)
-			if (post.content.length > 100) {
-				post.content = post.content.slice(0, 100);
-			}
-			
 			//removes all . from the back of the string
-			// console.log(post.content.length)
 			while (post.content[post.content.length - 1] === ".") {
 				post.content = post.content.slice(0, -1);
 			}
-			
+
 			//if over 100 leters show only 100 and add ...
-			// console.log(post.content.length)
 			if (post.content.length > 100) {
-				post.content += "...";
+				post.content = post.content.slice(0, 100) + "...";
 			}
 
 			//creates the output without the first post
