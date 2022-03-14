@@ -26,20 +26,22 @@ async function fetchAllPosts() {
 				}
 
 				//if over 2000 leters show only 2000 and add ...
+				let showReadMore = false;
 				if (post.content.length > 2000) {
 					post.content = post.content.slice(0, 2000) + "...";
+					showReadMore = true;
 				}
 				topOutput = (`
 				<li class="post" data-id="${post._id}">
-					<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
+					<a href="post.html?id=${post._id}"><h2 id="title"></h2></a>
 					
 					<div id="author">
 						By: <i>${post.author}</i>
 					</div>
 						
+					<p id="content" type="text"></p>
+					<a href="post.html?id=${post._id}" id="readMore"></a>
 					
-					<p id="content">${post.content}</p>
-					<a href="post.html?id=${post._id}" id="showPost">Show Post</a>
 
 					<img src="${img.urls.small}" alt="${img.alt_description}">
 
@@ -49,12 +51,17 @@ async function fetchAllPosts() {
 					${showTagsCapitalizeAddSpace(post.tags)}
 				</li>
 				`)
+				if(showReadMore) {
+					$('#readMore').append('Read more')
+				}
+				$('#top-post').append(topOutput);
+				$('#title').text(post.title);
+				$('#content').text(post.content);
+				topPostNotPrinted = false;
+				return false;
 			}
-			topPostNotPrinted = false;
-			return false;
 		});
 		topPostNotPrinted = false;
-		$('#top-post').append(topOutput)
 	}
 	
 	let output = [];

@@ -47,15 +47,15 @@ nav a {
 	padding: 0 70px 50px 70px;
 }
 
-#showPost {
-	font-size: 20px;
+#readMore {
 	align-self: flex-start;
-	margin-left: 50px;
-	margin-top: 50px;
+	font-size: 20px;
 }
 
 #content {
 	font-size: 18px;
+	white-space: pre-wrap;
+	/* margin: 20px 0 0 0; */
 }
 
 #top-post li img{

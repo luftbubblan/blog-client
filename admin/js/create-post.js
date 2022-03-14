@@ -28,7 +28,6 @@ async function createPost(e) {
     //fetches a random gardening picture
     const response = await fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening');
     const gardeningImage = JSON.stringify(await response.json());
-    
 
     const contentObj = {
         title: formData.get('title'),
