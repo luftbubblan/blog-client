@@ -16,6 +16,8 @@ function fetchAndHandelData() {
       );
     })
     .then((data) => {
+      const imgObject = JSON.parse(data[1].image);
+      console.log(imgObject);
       const filterByOurAuthores = data[0].filter((element) => {
         return (
           element.author === "Malin" ||
@@ -45,14 +47,18 @@ function fetchAndHandelData() {
       <div id="grid-container">
         <div id="blogPost">
           <h2 class="post-title">${data[1].title}</h2>
-          <span id="author">By: ${data[1].author}</span><br>
-          <p class="post-content">${data[1].content}</p>
-          <div id="tags">
-            Tags: ${showTagsCapitalizeAddSpace(data[1].tags)}<br>
+          <img class="post-img" src="${imgObject.urls.small}" alt="${
+        imgObject.alt_description
+      }"><br>
+      <p class="post-content">${data[1].content}</p>
+      <span id="author">By: ${data[1].author}</span><br>
+          <div>
+           
             Published: ${data[1].date.slice(0, 10)} ${data[1].date.slice(
         11,
         16
-      )}
+      )} <br>
+      ${showTagsCapitalizeAddSpace(data[1].tags)}
         </div>
       </div>
         <aside id="sidebar">
@@ -82,9 +88,10 @@ function showTagsCapitalizeAddSpace(array) {
   if (array === null) {
     return "";
   } else if (array.length !== 0) {
-    return `${array
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(", ")}`;
+    return `
+			Tags: 
+			${array.map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(", ")}
+		`;
   } else {
     return "";
   }
