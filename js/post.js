@@ -43,6 +43,15 @@ function fetchAndHandelData() {
         }
       }
 
+      // trying to output plain text
+      /*    console.log(data[1].content);
+      const newDiv = document.createElement("div");
+      const pContent = document.createElement("p");
+      pContent.innertext = data[1].content;
+      console.log(pContent);
+      newDiv.append(pContent);
+      console.log(newDiv); */
+
       document.querySelector("#main-content").innerHTML = `
       <div id="grid-container">
         <div id="blogPost">
