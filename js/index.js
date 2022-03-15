@@ -51,12 +51,12 @@ async function fetchAllPosts() {
 					${showTagsCapitalizeAddSpace(post.tags)}
 				</li>
 				`)
-				if(showReadMore) {
-					$('#readMore').append('Read more')
-				}
 				$('#top-post').append(topOutput);
 				$('#title').text(post.title);
 				$('#content').text(post.content);
+				if(showReadMore) {
+					$('#readMore').append('Read more');
+				}
 				topPostNotPrinted = false;
 				return false;
 			}

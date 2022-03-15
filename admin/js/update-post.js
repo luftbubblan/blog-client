@@ -28,7 +28,7 @@ async function fetchPost() {
     document.querySelector(`#${post.author}`).setAttribute('selected', '')
     document.querySelector('#contentTextarea').value = post.content;
     let allTags = document.querySelectorAll('.checkbox');
-
+    
     if(post.tags !== null) {
         for (let tag of allTags) {
             for (let postTag of post.tags) {
@@ -43,6 +43,13 @@ async function fetchPost() {
 async function updatePost(e) {
     e.preventDefault();
     
+    const urlParams2 = new URLSearchParams(window.location.search);
+
+    //fetches the specific pun that should be updated
+    const response = await fetch(`http://localhost:5000/posts/${urlParams2.get("id")}`);
+    const imageData = await response.json();
+    const image = imageData.image;
+
     //snaps up the title and saves it to a variable
     const title = document.querySelector('input').value;
     //snaps up the author and saves it to a variable
@@ -51,6 +58,7 @@ async function updatePost(e) {
     const content = document.querySelector('#contentTextarea').value;
     //snaps up the tags and saves it to a variable
     const allTags = document.querySelectorAll('.checkbox');
+    //snaps up the image and saves it to a variable
 
     let tags = [];
     for (let tag of allTags) {
@@ -63,7 +71,8 @@ async function updatePost(e) {
         title,
         author,
         content,
-        tags
+        tags,
+        image
     };
 
     //if title or content is just containing spaces cancel function
