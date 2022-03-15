@@ -27,7 +27,7 @@ async function fetchAllPosts() {
           <td><a href="/post.html?id=${post._id}">${post.title}</a></td>
           <td>${post.author}</td>
           <td>${showTagsCapitalizeAddSpace(post.tags)}</td>
-          <td>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</td>
+          <td>${post.date.slice(0, 10)},<br>${post.date.slice(11, 16)}</td>
           <td><a href="update-post.html?id=${
             post._id
           }">Update</a> / <a href="#" class="delete-task" data-task-id="${
