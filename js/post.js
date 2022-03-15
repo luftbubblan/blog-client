@@ -59,7 +59,7 @@ function fetchAndHandelData() {
           <img class="post-img" src="${imgObject.urls.small}" alt="${
         imgObject.alt_description
       }"><br>
-      <p class="post-content">${data[1].content}</p>
+      <p class="post-content" type="text"></p>
       <span id="author">By: ${data[1].author}</span><br>
           <div>
            
@@ -83,6 +83,8 @@ function fetchAndHandelData() {
         </aside>
       </div>
       `;
+
+      document.querySelector(".post-content").innerText = data[1].content;
     })
     .catch((error) => {
       console.log(error);
