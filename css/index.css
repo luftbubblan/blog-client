@@ -4,28 +4,27 @@
 
 body {
   	margin: 0;
-	/* background-color: rgb(247, 243, 214); */
-	/* background-image: url('https://images.creativemarket.com/0.1.0/ps/5975769/1820/1213/m1/fpnw/wm1/fwxtpn4ygjs2xlovco4q1ozusshrcb8qwjdqf5fmstabvk3oextqesm2p91doukf-.jpg?1551511735&s=e4c5c2ca0578ee4625a796fca9a52bca'); */
-	/* background-position: center;
-  	background-repeat: no-repeat;
- 	 background-size: cover; */
 }
 
 header {
 	background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
-	background-position-y: 87%;
+	background-position-y: 90%;
 	background-size: cover;
 	background-color: #528b68;
 	color: white;
 }
 
+h2 {
+	font-size: 27px;
+}
+
 nav {
-	width: 960px;
+	width: 1200px;
 	margin: auto;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 100px;
+	height: 150px;
 }
 
 nav a {
@@ -33,7 +32,7 @@ nav a {
 }
 
 #logoText {
-	font-size: 30px;
+	font-size: 50px;
 }
 
 #container {
@@ -47,16 +46,18 @@ nav a {
 #top-post {
 	list-style: none;
 	padding: 0;
+	margin: 0;
 }
 
 #top-post li{
+	padding: 50px 0;
+	border-bottom: 1px solid black;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 0 70px 50px 70px;
 }
 
-#readMore {
+#readMoreTopPost {
 	align-self: flex-start;
 	font-size: 20px;
 }
@@ -75,6 +76,7 @@ nav a {
 #more-post-headline {
 	text-align: center;
 	margin-top: 40px;
+	text-decoration: underline;
 }
 
 #post-list {
@@ -84,29 +86,47 @@ nav a {
 
 .post {
 	border-bottom: 1px solid black;
-	margin: 10px 0px;
-	padding: 0 0 10px 10px;
+	display: flex;
+	align-items: center;
+	padding: 50px 0;
 }
 
-button {
-	font-size: 22px;
-	transition: 0.7s;
-	margin: 30px 0 50px 0;
-	width: 180px;
-	height: 50px;
+.post p {
+	font-size: 18px;	
+}
+
+.post a {
+	font-size: 20px;	
+}
+
+.leftSideOfPost {
+	display: flex;
+	justify-content: center;
+	width: 38%;
+}
+
+.leftSideOfPost img{
+	height: 200px;
+}
+
+.rightSideOfPost {
+	width: 50%;
+}
+
+.dateAndTags {
+	margin-top: 20px;
+}
+
+#postLoadDiv {
 	align-self: center;
-	border-radius: 10px;
-}
-
-button:hover {
-	cursor: pointer;
-	background-color: #528b68;
-	border-color: #2f662fd0;
-	color: white;
+	margin: 20px 0 70px 0;
 }
 
 #allPostsLoaded {
-	font-size: 20px;
-	margin: 30px 0 50px 0;
-	align-self: center;
+	font-size: 18px;
+}
+
+#loadMorePosts {
+	font-size: 18px;
+	cursor: pointer;
 }

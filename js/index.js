@@ -26,13 +26,13 @@ async function fetchAllPosts() {
 				}
 
 				//if over 2000 leters show only 2000 and add ...
-				let showReadMore = false;
+				let showReadMoreTopPost = false;
 				if (post.content.length > 2000) {
 					post.content = post.content.slice(0, 2000) + "...";
-					showReadMore = true;
+					showReadMoreTopPost = true;
 				}
 				topOutput = (`
-				<li class="post" data-id="${post._id}">
+				<li class="top-post" data-id="${post._id}">
 					<a href="post.html?id=${post._id}"><h2 id="title"></h2></a>
 					
 					<div id="author">
@@ -40,7 +40,7 @@ async function fetchAllPosts() {
 					</div>
 						
 					<p id="content" type="text"></p>
-					<a href="post.html?id=${post._id}" id="readMore"></a>
+					<a href="post.html?id=${post._id}" id="readMoreTopPost"></a>
 					
 
 					<img src="${img.urls.small}" alt="${img.alt_description}">
@@ -54,8 +54,8 @@ async function fetchAllPosts() {
 				$('#top-post').append(topOutput);
 				$('#title').text(post.title);
 				$('#content').text(post.content);
-				if(showReadMore) {
-					$('#readMore').append('Read more');
+				if(showReadMoreTopPost) {
+					$('#readMoreTopPost').append('Read more');
 				}
 				topPostNotPrinted = false;
 				return false;
@@ -69,6 +69,7 @@ async function fetchAllPosts() {
     //iterates all posts except the first one and creates the html for them
     $.each(posts, function (key, post) {
       	if (trueAuthor(post.author, approvedAuthors)) {
+			const img = JSON.parse(post.image)
 			//removes all . from the back of the string
 			while (post.content[post.content.length - 1] === ".") {
 				post.content = post.content.slice(0, -1);
@@ -78,60 +79,70 @@ async function fetchAllPosts() {
 			if (post.content.length > 100) {
 				post.content = post.content.slice(0, 100) + "...";
 			}
-
+			
 			//creates the output without the first post
 			output.push(`
-				<li class="post" data-id="${post._id}">
+			<li class="post" data-id="${post._id}">
+				<div class="leftSideOfPost">
+					<img src="${img.urls.small}" alt="${img.alt_description}">
+				</div>
+				
+				<div class="rightSideOfPost">
 					<a href="post.html?id=${post._id}"><h2>${post.title}</h2></a>
-	
-					<span id="author">By: <i>${post.author}</i></span>
-	
-					<p>
-						${post.content}<br>
-						<a href="post.html?id=${post._id}">Show Post</a>		
-					</p>
-	
-					<span id="date">
+					
+					<span class="author">By: <i>${post.author}</i></span>
+					
+					<p>${post.content}</p>
+					<a href="post.html?id=${post._id}" id="readMore${post._id}" class="readMore"></a>
+					
+					<div class="dateAndTags">
 						<i>${post.date.slice(0, 10)} - ${post.date.slice(11, 16)}</i>
-					</span>
-					${showTagsCapitalizeAddSpace(post.tags)} 
-				</li>
+						${showTagsCapitalizeAddSpace(post.tags)}
+					</div>
+				</div>
+			</li>
 			`);
-      	}
-    });
-
+		}
+    })
+	
     let i = 1;
     let j = 6;
     //posts the 6 latest posts to he site in the ul
     for (; i < j; i++) {
-      $("#post-list").append(output[i]);
+		$("#post-list").append(output[i]);
     }
 
-    //if all posts are loaded(less then 6) show message otherwise show load more btn
+	// show read more text on posts with more than 100 letters
+	$.each(posts, function (key, post) {
+		if (trueAuthor(post.author, approvedAuthors)) {
+			if (post.content.length > 100) {
+				$(`#readMore${post._id}`).append('Read more');
+			}
+		}
+	})
+
+    //if all posts are loaded(less then 6) show message otherwise show load more link
     if (output.length <= 6) {
-      $("#container").append(
-        '<div id="allPostsLoaded">All posts are loaded</div>'
-      );
+      	$("#allPostsLoaded").removeAttr('hidden');
     } else {
-      $("button").removeAttr("hidden");
+		$("#loadMorePosts").removeAttr('hidden');
     }
-
-    //on click load 5 more posts or show that there are no more posts
-    $("button").click(function () {
-      j += 5;
-      for (; i < j; i++) {
-        $("#post-list").append(output[i]);
-      }
-      if (output.length == $("li").length) {
-        $("#container").append(
-          '<div id="allPostsLoaded">All posts are loaded</div>'
-        );
-        $("button").attr("hidden", "true");
+	
+    //on click load 5 more posts or show that there are no more posts to load
+    $("#loadMorePosts").click(function () {
+		j += 5;
+		for (; i < j; i++) {
+			$("#post-list").append(output[i]);
+		}
+		if (output.length == $("li").length) {
+			$("#allPostsLoaded").removeAttr('hidden');
+			$("#loadMorePosts").attr("hidden", "true");
       }
     });
-  } catch (error) {
-    console.log(error);
-  }
+
+ 	} catch (error) {
+    	console.log(error);
+  	}
 }
 
 //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
