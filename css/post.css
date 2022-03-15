@@ -7,17 +7,20 @@ body {
 }
 
 header {
+  background-image: url("https://images.unsplash.com/photo-1625246333195-78d9c38ad449?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
+  background-position-y: 87%;
+  background-size: cover;
   background-color: #528b68;
   color: white;
 }
 
 nav {
-width: 960px;
-margin: auto;
-display: flex;
-align-items: center;
-justify-content: space-between;
-height: 100px;
+  width: 960px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100px;
 }
 
 nav a {
@@ -25,7 +28,7 @@ nav a {
 }
 
 #logoText {
-font-size: 30px;
+  font-size: 30px;
 }
 
 #grid-container {
