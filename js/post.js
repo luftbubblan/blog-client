@@ -72,7 +72,7 @@ function fetchAndHandelData() {
       </div>
         <aside id="sidebar">
           <h2>About us</h2>
-          <img src="https://images.unsplash.com/photo-1487700160041-babef9c3cb55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2352&q=80")" width="190px" height="160px">
+          <img src="https://images.unsplash.com/photo-1438109382753-8368e7e1e7cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80")" width="280px">
           <p>The Gardening Blog is THE place for everything garderning!</p>
           <div>
             <h3>Latest posts</h3>
