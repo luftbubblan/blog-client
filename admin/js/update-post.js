@@ -27,15 +27,10 @@ async function fetchPost() {
     `http://localhost:5000/posts/${urlParams.get("id")}`
   );
   const post = await response.json();
-  //2) sparar bildobjektet i den globala variabeln i JSON-format (även testat att köra JSON.parse och göra om den till ett objekt)
-  imgJSON = post.image;
-  console.log(imgJSON);
 
-  document.querySelector("input").value = post.title;
-  document.querySelector(`#${post.author}`).setAttribute("selected", "");
-  document.querySelector("#contentTextarea").value = post.content;
 
-<<<<<<< HEAD
+
+
     document.querySelector('input').value = post.title;
     document.querySelector(`#${post.author}`).setAttribute('selected', '')
     document.querySelector('#contentTextarea').value = post.content;
@@ -48,23 +43,10 @@ async function fetchPost() {
                     tag.checked = true;
                 }
             }  
-=======
-  let allTags = document.querySelectorAll(".checkbox");
-
-  if (post.tags !== null) {
-    for (let tag of allTags) {
-      for (let postTag of post.tags) {
-        if (tag.value === postTag) {
-          tag.checked = true;
->>>>>>> 2677dc8e7620de103de1c4dee4ddf08ee1eb27d7
-        }
-      }
-    }
-  }
 }
 
 async function updatePost(e) {
-<<<<<<< HEAD
+
     e.preventDefault();
     
     const urlParams2 = new URLSearchParams(window.location.search);
@@ -82,21 +64,8 @@ async function updatePost(e) {
     const content = document.querySelector('#contentTextarea').value;
     //snaps up the tags and saves it to a variable
     const allTags = document.querySelectorAll('.checkbox');
-    //snaps up the image and saves it to a variable
-=======
-  e.preventDefault();
-  //snaps up the title and saves it to a variable
-  const title = document.querySelector("input").value;
-  //snaps up the author and saves it to a variable
-  const author = document.querySelector("select").value;
-  //snaps up the content and saves it to a variable
-  const content = document.querySelector("#contentTextarea").value;
-  //snaps up the tags and saves it to a variable
-  const allTags = document.querySelectorAll(".checkbox");
-  //3) sätter en ny variabel som JSON-strängen
-  const imgData = imgJSON;
-  console.log(imgData);
->>>>>>> 2677dc8e7620de103de1c4dee4ddf08ee1eb27d7
+
+
 
   let tags = [];
   for (let tag of allTags) {
@@ -111,7 +80,7 @@ async function updatePost(e) {
     author,
     content,
     tags,
-    imgData,
+    image,
   };
 
   console.log(contentObj);
