@@ -59,10 +59,14 @@ Unique style for this page
 /* Media queries */
 
 @media screen and (max-width: 1120px) {
+  nav a {
+    text-align: center;
+  }
+
   #grid-container {
     grid-template-columns: auto;
     column-gap: 0;
-    padding: 0 5px;
+    padding: 0 10px;
   }
 
   #sidebar {
