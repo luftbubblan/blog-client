@@ -1,106 +1,60 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <!-- CUSTOM CSS -->
-    <link rel="stylesheet" href="css/create&update-post.css" />
-    <link rel="stylesheet" href="../css/style.css" />
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hubballi&family=Raleway:wght@300&family=Sorts+Mill+Goudy&family=Spartan:wght@300;600&family=Staatliches&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div id="container">
-      <a href="admin.html">&#x2190; back to admin</a>
-      <h1>Create new Post</h1>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<!-- CUSTOM CSS -->
+	<link rel="stylesheet" href="css/create&update-post.css">
+	<link rel="stylesheet" href="../css/style.css">
+	<!-- FONTS -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Hubballi&family=Raleway:wght@300&family=Sorts+Mill+Goudy&family=Spartan:wght@300;600&family=Staatliches&display=swap" rel="stylesheet">
+</head>
+<body>
+	<div id="container">
+		<a href="admin.html">&#x2190; back to admin</a>
+		<h1>Create new Post</h1>
 
-      <form id="createPostForm">
-        <div id="inputDiv">
-          <div class="innerInputDiv">
-            <label for="title">Title</label>
-            <input class="inputField" type="text" name="title" required />
-            <div id="titleError" class="errors" hidden></div>
-          </div>
+		<form id="createPostForm">
+			<div id="inputDiv">
+				<div class="innerInputDiv">
+					<label for="title">Title</label>
+					<input class="inputField" type="text" name="title" required />
+					<div id="titleError" class="errors" hidden></div>
+				</div>
 
-          <div class="innerInputDiv">
-            <label for="author">Author</label>
-            <select id="authorList" name="author" required>
-              <option disabled selected value>
-                -- select an idiot below --
-              </option>
-            </select>
-          </div>
-        </div>
+				<div class="innerInputDiv">
+					<label for="author">Author</label>
+					<select id="authorList" name="author" required>
+						<option disabled selected value>-- select an idiot below --</option>
+					</select>
+				</div>
+			</div>
 
-        <div id="contentDiv">
-          <label for="content">Content</label>
-          <textarea
-            name="content"
-            id="contentTextarea"
-            cols="30"
-            rows="20"
-            required
-          ></textarea>
-          <div id="contentError" class="errors" hidden></div>
-        </div>
+			<div id="contentDiv">
+				<label for="content">Content</label>
+				<textarea name="content" cols="30" rows="20" required></textarea>
+				<div id="contentError" class="errors" hidden></div>
+			</div>
 
-        <div id="tagsDiv" required>
-          <label for="tags" required>Tags</label><br />
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="herb"
-          />Herb
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="flowers"
-          />Flowers
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="trees"
-          />Trees
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="fruits"
-          />Fruits
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="pots"
-          />Pots
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="vegetables"
-          />Vegetables
-          <input
-            name="tags"
-            class="checkbox"
-            type="checkbox"
-            value="architecture"
-          />Architecture
-        </div>
-        <input type="submit" id="submitBtn" value="Post new" /><br />
-      </form>
-    </div>
+			<div id="tagsDiv" required>
+				<label for="tags" required>Tags</label><br>
+				<input name="tags" class="checkbox" type="checkbox" value="herb">Herb
+				<input name="tags" class="checkbox" type="checkbox" value="flowers">Flowers
+				<input name="tags" class="checkbox" type="checkbox" value="trees">Trees
+				<input name="tags" class="checkbox" type="checkbox" value="fruits">Fruits
+				<input name="tags" class="checkbox" type="checkbox" value="pots">Pots
+				<input name="tags" class="checkbox" type="checkbox" value="vegetables">Vegetables
+				<input name="tags" class="checkbox" type="checkbox" value="architecture">Architecture
+			</div>
+			<input type="submit" id="submitBtn" value="Post new"><br>
+		</form>
+	</div>
 
-    <!-- JQUERY JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <!-- CUSTOM JS -->
-    <script src="js/create-post.js"></script>
-  </body>
+	<!-- JQUERY JS-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<!-- CUSTOM JS -->
+	<script src="js/create-post.js"></script>
+</body>
 </html>
