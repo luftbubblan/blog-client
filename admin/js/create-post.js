@@ -5,7 +5,8 @@ window.onload = async function () {
 
 	createApprovedAuthorsList(approvedAuthors);
 
-	submitNewPost(photoData);
+	// submitNewPost(photoData);
+	$('#createPostForm').submit(submitNewPost(photoData))
 };
 
 
@@ -42,8 +43,8 @@ function createApprovedAuthorsList(approvedAuthors) {
 }
 
 
-async function submitNewPost(gardeningImage) {
-	$('#createPostForm').submit( async function(e) {
+async function submitNewPost(e, gardeningImage) {
+	// $('#createPostForm').submit( async function(e) {
 		e.preventDefault();
 
 		let allTags = [];
@@ -61,6 +62,7 @@ async function submitNewPost(gardeningImage) {
 			tags: allTags,
 			image: gardeningImage,
 		};
+		console.log(contentObj)
 
 		//variable used to abort function if a required field is empty
 		emptyField = false;
@@ -103,17 +105,20 @@ async function submitNewPost(gardeningImage) {
 
 		try {
 			// POSTs the JSON to the API as a new post
-			const response = await fetch("http://localhost:5000/posts/", {
-				method: "POST",
-				headers: {"Content-Type": "application/json"},
+			const response = await fetch(`http://localhost:5000/posts/`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
 				body: JSONContent
 			});
+			console.log("sent")
 
 		} catch (error) {
 			console.log(error);
 		}
 
 			//sends the user back to admin site
-			window.location.replace("admin.html");
-	});
+			// window.location.replace("admin.html");
+	// });
 }
