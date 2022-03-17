@@ -9,7 +9,7 @@ h2 {
 #container {
   display: flex;
   flex-direction: column;
-  width: 960px;
+  max-width: 960px;
   margin: 0 auto;
   background-color: white;
 }
@@ -100,4 +100,28 @@ h2 {
 #loadMorePosts {
   font-size: 18px;
   cursor: pointer;
+}
+
+/* Media queries */
+
+@media screen and (max-width: 920px) {
+  #top-post li img {
+    max-width: 100%;
+    object-fit: cover;
+  }
+
+  #container {
+    padding: 0 30px;
+  }
+
+  #post-list {
+    max-width: 920px;
+  }
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }
