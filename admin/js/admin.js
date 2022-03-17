@@ -38,25 +38,15 @@ async function fetchAllPosts() {
       }
     });
 
-    //function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
-    function showTagsCapitalizeAddSpace(array) {
-      if (array === null) {
-        return "";
-      } else if (array.length !== 0) {
-        return `${array
-          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-          .join(", ")}`;
-      } else {
-        return "";
-      }
-    }
-
     document.querySelector("#tBody").innerHTML = html;
+    deletingTasks();
   } catch (err) {
     errDiv.innerHTML = `There was an error (${err}). Try again!`;
   }
+}
 
-  //deleting the tasks
+//function for deleting tasks
+function deletingTasks() {
   const deleteTask = document.querySelectorAll(".delete-task");
 
   for (let task of deleteTask) {
@@ -77,6 +67,20 @@ async function fetchAllPosts() {
   }
 }
 
+//function for showing tags (leaving empty ones out), capitalize first tag character and add space after ","
+function showTagsCapitalizeAddSpace(array) {
+  if (array === null) {
+    return "";
+  } else if (array.length !== 0) {
+    return `${array
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(", ")}`;
+  } else {
+    return "";
+  }
+}
+
+//function for only getting posts from the authors of the site
 function trueAuthor(author, approvedAuthors) {
   for (let approvedAuthor of approvedAuthors) {
     if (author === approvedAuthor) {
