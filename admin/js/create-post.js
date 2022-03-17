@@ -16,18 +16,18 @@ async function fetchRandomPictureAndAuthors() {
 	try {
 		const data = await Promise.all([
 			//fetch random gardening picture
-			// fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening').then(resp => resp.json()),
-								//Temporary fetch unspash is timed out, to many calls per hour
-								// fetch('https://random.dog/doggos').then(resp => resp.json()),
+			fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening').then(resp => resp.json()),
 			//fetches the list with approved authors
 			fetch('authors.txt').then(resp => resp.text())
 		]);
 
+		//converts fetched image data to JSON
+		data[0] = JSON.stringify(data[0]);
+
 		//creates an array with the approved authors
 		const approvedAuthors = data[1].split(",");
-		
-								// return [data[0][0], approvedAuthors];
-								//remove the above and use the under when using unspashAPI
+
+		//returns the imagedata and all approved authors
 		return [data[0], approvedAuthors];
 
 	} catch (error) {
@@ -52,7 +52,6 @@ async function submitNewPost(e, gardeningImage) {
 	$.each(formData.getAll("tags"), function (key, tag) {
 		allTags.push(tag);
 	});
-	console.log(gardeningImage)
 
 	//Object with all the neede data
 	const contentObj = {
@@ -62,7 +61,6 @@ async function submitNewPost(e, gardeningImage) {
 		tags: allTags,
 		image: gardeningImage,
 	};
-	console.log(contentObj)
 
 	//variable used to abort function if a required field is empty
 	emptyField = false;
@@ -118,5 +116,5 @@ async function submitNewPost(e, gardeningImage) {
 	}
 
 	//sends the user back to admin site
-	// window.location.replace("admin.html");
+	window.location.replace("admin.html");
 }
