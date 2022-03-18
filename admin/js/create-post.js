@@ -50,7 +50,7 @@ async function submitNewPost(e) {
 	//variable that calls function that fetches random gardening image
 	const gardeningImage = await fetchRandomGardeningImage();
 
-	//Object with all the neede data
+	//Object with all the needed data
 	const contentObj = {
 		title: formData.get("title"),
 		author: formData.get("author"),

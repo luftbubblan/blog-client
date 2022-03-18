@@ -1,18 +1,25 @@
 window.onload = async function () {
+	//varable with all posts and approved authors
   	const data = await fetchAllPostsAndAuthors();
 
+	//varable with all posts
 	const posts = data[0];
+	//varable with all approved authors
 	const approvedAuthors = data[1];
 
+	//prints out the top(big) post to the site
 	printTopPost(posts, approvedAuthors);
 
 	let output = [];
 	let i = 1;
 	let j = 6;
+	//prints out the next 5(if there are any) posts to the site
 	i = printPostList(posts, approvedAuthors, output, i, j);
 
+	//determines if a "load More Posts" link/btn or a "All Posts Are Loaded" text should be shown
 	loadMoreMessage(output);
 
+	//prints more posts to the site if "load More Posts" link/btn is clicked
 	loadMorePosts(output, i, j);
 };
 
