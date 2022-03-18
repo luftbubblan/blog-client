@@ -1,132 +1,190 @@
-window.onload = function () {
-  authors()
-  fetchPost();
-  $('#updatePostForm').submit(updatePost);
+window.onload = async function () {
+    //varable with all approved authors
+	const approvedAuthors = await fetchApprovedAuthors();
+
+	//creates the list on the site with approved authors to chose from
+	createApprovedAuthorsList(approvedAuthors);
+
+
+    //variable with the data about the posts urlParams
+    const postURL = urlParams();
+
+    //varable with the data about the post that is supose to get updated
+    const post = await fetchPost(postURL);
+
+    //using the data from the fetched post to fills in values in the input, textarea and author
+    fillInFetchedPostValues(post);
+
+    //when "Post new" btn is clicked 
+	$('#updatePostForm').submit(async function(e) {
+		e.preventDefault();
+		//variable that calls function that takes all info from the form and creates a random gardening image and creates error messages if needed
+		const postObject = await createPostObject(e, post);
+        //PATCHes it to the API
+		patchPost(postObject, postURL);
+	})
 }
 
-async function authors() {
-  const authors = await fetch('authors.txt');
-  const authorsText = await authors.text();
-  const approvedAuthors = authorsText.split(",");
 
-  for (let approvedAuthor of approvedAuthors) {
-      $('#authorList').append(`
-      <option id="${approvedAuthor}" value="${approvedAuthor}">${approvedAuthor}</option>
-      `)
-}
-}
+async function fetchApprovedAuthors() {
+	try {
+		//fetches the approved authors from the txt file and makes it an array
+		const authors = await fetch("authors.txt");
+		const authorsText = await authors.text();
+		const approvedAuthors = authorsText.split(",");
+		  
+		//returns the array with approved authors
+		return approvedAuthors;
 
-async function fetchPost() {
-
-  const urlParams = new URLSearchParams(window.location.search);
-
-  //fetches the specific pun that should be updated
-  const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`);
-  const post = await response.json();
-
-  document.querySelector('input').value = post.title;
-  document.querySelector(`#${post.author}`).setAttribute('selected', '')
-  document.querySelector('#contentTextarea').value = post.content;
-  let allTags = document.querySelectorAll('.checkbox');
-  
-  if(post.tags !== null) {
-      for (let tag of allTags) {
-          for (let postTag of post.tags) {
-              if (tag.value === postTag) {
-                  tag.checked = true;
-              }
-          }  
-      }
-  }
+	} catch (error) {
+		console.log(error);
+	}
 }
 
-async function updatePost(e) {
-  e.preventDefault();
-  
-  const urlParams2 = new URLSearchParams(window.location.search);
 
-  //fetches the specific pun that should be updated
-  const response = await fetch(`http://localhost:5000/posts/${urlParams2.get("id")}`);
-  const imageData = await response.json();
-  const image = imageData.image;
+function createApprovedAuthorsList(approvedAuthors) {
+	//appends every approved author to the Author menu
+	for (let approvedAuthor of approvedAuthors) {
+		$("#authorList").append(`<option id="${approvedAuthor}" value="${approvedAuthor}">${approvedAuthor}</option>`);
+	}
+}
 
-  //snaps up the title and saves it to a variable
-  const title = document.querySelector('input').value;
-  //snaps up the author and saves it to a variable
-  const author = document.querySelector('select').value;
-  //snaps up the content and saves it to a variable
-  const content = document.querySelector('#contentTextarea').value;
-  //snaps up the tags and saves it to a variable
-  const allTags = document.querySelectorAll('.checkbox');
-  //snaps up the image and saves it to a variable
 
-  let tags = [];
-  for (let tag of allTags) {
-      if(tag.checked) {
-          tags.push(tag.value);
-      }
-  }
+function urlParams() {
+    //URLSearchParams to get the posts id
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams;
+}
 
-  const contentObj = {
-      title,
-      author,
-      content,
-      tags,
-      image
-  };
 
-  //if title or content is just containing spaces cancel function
-  //if they contain stuff remove error
-  emptyField = false
-  if(contentObj.title.trim() === "") {
-      $('#titleError').html('<div>You can not submit an empty Title</div>');
-      $('#titleError').removeAttr('hidden');
-      emptyField = true;
-  } else if(contentObj.title.trim().length > 60) {
-      console.log("more then 10");
-      $('#titleError').html('<div>The Title can only be 60 characters long</div>');
-      $('#titleError').removeAttr('hidden');
-      emptyField = true;
-  } 
-  else {
-      $('#titleError').attr('hidden', 'true');
-  }
+async function fetchPost(urlParams) {
+    try {
+        //fetches the specific post that should be updated
+        const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`);
+        const post = await response.json();
+    
+        //returns the fetched post
+        return post;
 
-  if (contentObj.content.trim() === "") {
-      $('#contentError').html('<div>You can not submit empty Content</div>')
-      $('#contentError').removeAttr('hidden');
-      emptyField = true;
-  } else {
-      $('#contentError').attr('hidden', 'true');
-  }
+    } catch (error) {
+		console.log(error);
+	}
+}
 
-  if(emptyField) {
-      return false
-  }
 
-  //converts the content to JSON
-  const JSONContent = JSON.stringify(contentObj);
+function fillInFetchedPostValues(post) {
+    //prints fetched post title in the input field
+    document.querySelector('input').value = post.title;
+    //selects the posts author in the author list
+    document.querySelector(`#${post.author}`).setAttribute('selected', '')
+    //prints fetched post content in the textfield
+    document.querySelector('#contentTextarea').value = post.content;
+    //varable with all tags
+    let allTags = document.querySelectorAll('.checkbox');
+    
+    //loops all tags that the fetched post has
+    for (let postTag of post.tags) {
+        //loops all 7 tags
+        for (let tag of allTags) {
+            //if the fetched post has the tag check that tag on the site
+            if (tag.value === postTag) {
+                tag.checked = true;
+            }
+        }  
+    }
+}
 
-  const urlParams = new URLSearchParams(window.location.search);
 
-  try {
-      //PATCHes the JSON to the API
-      const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`, {
-          method: 'PATCH',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSONContent
-      });
+async function createPostObject(e, post) {
+    e.preventDefault();
+    
+    //snaps up the title and saves it to a variable
+    const title = document.querySelector('input').value;
+    //snaps up the author and saves it to a variable
+    const author = document.querySelector('select').value;
+    //snaps up the content and saves it to a variable
+    const content = document.querySelector('#contentTextarea').value;
+    //snaps up the tags and saves it to a variable
+    const allTags = document.querySelectorAll('.checkbox');
+    //varable with the image from the fetched post
+    const image = post.image;
 
-      if(!response.ok) {
-          throw new Error('API Error');
-      }
+    //varable with all tags from the fetched post
+    let tags = [];
+    for (let tag of allTags) {
+        if(tag.checked) {
+            tags.push(tag.value);
+        }
+    }
 
-      //sends the user back to index site
-      window.location.replace('admin.html');
+    //Object with all the needed data
+    const contentObj = {
+        title,
+        author,
+        content,
+        tags,
+        image
+    };
 
-  } catch(error) {
-      console.log(error);
-  }
+    //variable used to abort function if a required field is empty
+	emptyField = false;
+
+	//if Title only contains spaces, show error message, emptyField = true
+	if (contentObj.title.trim() === "") {
+		$("#titleError").html("You can not submit an empty Title");
+		$("#titleError").removeAttr("hidden");
+		emptyField = true;
+
+	//if Title contains more than 60 chars, show error message, emptyField = true
+	} else if (contentObj.title.trim().length > 60) {
+		$("#titleError").html("The Title can only be 60 characters long");
+		$("#titleError").removeAttr("hidden");
+		emptyField = true;
+
+	//if Title error message was shown and the error has been corrected hide the error div
+	} else {
+		$("#titleError").attr("hidden", "true");
+	}
+
+	//if Content only contains spaces, show error message, emptyField = true
+	if (contentObj.content.trim() === "") {
+		$("#contentError").html("You can not submit empty Content");
+		$("#contentError").removeAttr("hidden");
+		emptyField = true;
+
+	//if Content error message was shown and the error has been corrected hide the error div
+	} else {
+		$("#contentError").attr("hidden", "true");
+	}
+
+	//if emptyField = true cancel the function(form is not submited, user gets error messages instead)
+	if (emptyField) {
+		return false;
+	}
+
+	//converts the content to JSON
+	const JSONContent = JSON.stringify(contentObj);
+
+    //returns the new post object as JSON
+    return JSONContent;
+}
+
+
+async function patchPost(JSONContent, urlParams) {
+    try {
+        //PATCHes the JSON to the API
+        const response = await fetch(`http://localhost:5000/posts/${urlParams.get("id")}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSONContent
+        });
+
+        //sends the user back to admin site
+        window.location.replace('admin.html');
+
+    } catch(error) {
+        console.log(error);
+    }
 }
