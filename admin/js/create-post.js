@@ -1,10 +1,14 @@
 window.onload = async function () {
+	//varable with all approved authors
 	const approvedAuthors = await fetchApprovedAuthors();
 
+	//creates the list on the site with approved authors to chose from
 	createApprovedAuthorsList(approvedAuthors);
 
+	//when "Post new" btn is clicked 
 	$('#createPostForm').submit( function(e) {
 		e.preventDefault();
+		//takes all info from the form and creates a random gardening image and posts it to the API and creates all the HTML for the site
 		submitNewPost(e);
 	});
 };
@@ -43,8 +47,7 @@ async function submitNewPost(e) {
 		allTags.push(tag);
 	});
 
-	//varable that calls function that fetches random gardening image
-	// await fetchRandomGardeningImage();
+	//variable that calls function that fetches random gardening image
 	const gardeningImage = await fetchRandomGardeningImage();
 
 	//Object with all the neede data
@@ -116,11 +119,14 @@ async function submitNewPost(e) {
 
 async function fetchRandomGardeningImage() {
 	try {
-		const response = await fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening').then(resp => resp.json());
-		const imageData = response.json();
+		//fetches data about a random gardening image
+		const response = await fetch("https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening");
+		const imageData = await response.json();
+		//makes it JSON
+		const gardeningImage = JSON.stringify(imageData);
 
-		console.log(imageData);
-		return imageData;
+		//returns the data about the random gardening image
+		return gardeningImage;
 
 	} catch (error) {
 		console.log(error);
