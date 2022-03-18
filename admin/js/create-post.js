@@ -1,7 +1,5 @@
 window.onload = async function () {
-	const data = await fetchRandomPictureAndAuthors();
-	// const photoData = data[0];
-	const approvedAuthors = data;
+	const approvedAuthors = await fetchApprovedAuthors();
 
 	createApprovedAuthorsList(approvedAuthors);
 
@@ -12,27 +10,15 @@ window.onload = async function () {
 };
 
 
-async function fetchRandomPictureAndAuthors() {
+async function fetchApprovedAuthors() {
 	try {
-		// const data = await Promise.all([
-			//fetch random gardening picture
-			// fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening').then(resp => resp.json()),
-			//fetches the list with approved authors
-			// fetch('authors.txt').then(resp => resp.text())
-		// ]);
-		const response = await fetch('authors.txt');
-		const aprovedAuthorsData = await response.text();
-
-		//converts fetched image data to JSON
-		// data[0] = JSON.stringify(data[0]);
-		
-		//creates an array with the approved authors
-		
-
-		//returns the imagedata and all approved authors
-		return aprovedAuthorsJson;
-		return [approvedAuthors];
-		return aprovedAuthorsData;
+		//fetches the approved authors from the txt file and makes it an array
+		const authors = await fetch("authors.txt");
+		const authorsText = await authors.text();
+		const approvedAuthors = authorsText.split(",");
+		  
+		//returns the array with approved authors
+		return approvedAuthors;
 
 	} catch (error) {
 		console.log(error);
@@ -57,8 +43,9 @@ async function submitNewPost(e) {
 		allTags.push(tag);
 	});
 
-	fetchRandomGardeningImage();
-	// const gardeningImage = fetchRandomGardeningImage();
+	//varable that calls function that fetches random gardening image
+	// await fetchRandomGardeningImage();
+	const gardeningImage = await fetchRandomGardeningImage();
 
 	//Object with all the neede data
 	const contentObj = {
@@ -123,7 +110,7 @@ async function submitNewPost(e) {
 	}
 
 	//sends the user back to admin site
-	window.location.replace("admin.html");
+	// window.location.replace("admin.html");
 }
 
 
@@ -132,7 +119,8 @@ async function fetchRandomGardeningImage() {
 		const response = await fetch('https://api.unsplash.com/photos/random/?client_id=ZnDEJlu-KLWTsvfpRtkxmrG6zkv4LIiqLB9acm7hBV8&query=gardening').then(resp => resp.json());
 		const imageData = response.json();
 
-		console.log(imageData)
+		console.log(imageData);
+		return imageData;
 
 	} catch (error) {
 		console.log(error);
