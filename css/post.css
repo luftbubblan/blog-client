@@ -78,3 +78,9 @@ Unique style for this page
     font-size: 28px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .post-img {
+    width: 90%;
+  }
+}
